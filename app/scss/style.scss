@@ -342,7 +342,6 @@
             padding: 15px;
             &__media-wrapper {
                 position: relative;
-                overflow: hidden;
             }
             img {
                 vertical-align: bottom;
@@ -966,16 +965,38 @@
 .certificates {
     background-color: #faf5ef;
     padding: 40px 0;
+
     &__title {
         text-align: center;
+    }
+
+    .certificates-wrapper {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        z-index: 1;
     }
     &__inner {
         display: flex;
         justify-content: space-around;
         align-items: center;
+        flex-wrap: nowrap;
+        width: 200%;
+        animation: scrollText 10s infinite linear;
+        min-width: 1000px;
+        gap: 30px;
     }
     &__item {
+        min-width: 100px;
         max-width: 120px;
+    }
+    @keyframes scrollText {
+        from {
+            transform: translateX(0%);
+        }
+        to {
+            transform: translateX(-50%);
+        }
     }
 }
 .footer {
