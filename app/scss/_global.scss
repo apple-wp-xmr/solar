@@ -1,0 +1,225 @@
+html {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul,
+li,
+ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    font-size: inherit;
+}
+
+p {
+    margin: 0;
+}
+
+.container-header {
+    max-width: 1500px;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+
+.container-section-1 {
+    max-width: 1110px;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+
+.container {
+    max-width: 1200px;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+
+body {
+    min-width: 360px;
+    @include FCata400;
+    font-size: 14px;
+    line-height: 18px;
+    color: #101010;
+    &::-webkit-scrollbar-thumb {
+        background: #272525;
+        border-radius: 8px;
+    }
+
+    &::-webkit-scrollbar {
+        width: 10px;
+        background: #413e3e;
+    }
+    transition: all 0.4s ease-in-out;
+}
+
+::-moz-selection {
+    /* Code for Firefox */
+    color: $white;
+    background: $primary;
+}
+
+::selection {
+    color: $white;
+    background: $primary;
+}
+
+.intro {
+    @include FCata700;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    color: $secondary;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.intro--primary {
+    color: $primary;
+}
+
+.intro--line-left {
+    &::before {
+        content: '';
+        width: 16px;
+        height: 2px;
+        background-color: $primary;
+        position: absolute;
+        top: -10px;
+        left: 0px;
+    }
+}
+.intro--line-center {
+    display: inline-block;
+    &::before {
+        content: '';
+        width: 16px;
+        height: 2px;
+        background-color: $primary;
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.lead {
+    font-size: 46px;
+    @include FCata800;
+    line-height: 60px;
+    padding-bottom: 20px;
+}
+
+.subtitle {
+    @include FCata800;
+    font-size: 18px;
+}
+
+.text {
+    padding-bottom: 30px;
+    color: $secondary;
+    font-size: 15px;
+    line-height: 24px;
+    @include FCata400;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #e7dfd5;
+}
+
+.list {
+    &__item {
+        @include FCata600;
+        line-height: 24px;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        i {
+            margin-right: 10px;
+        }
+    }
+}
+
+i {
+    color: $primary;
+}
+
+.main-button {
+    background-color: $primary;
+    width: 153px;
+    height: 47px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    text-transform: capitalize;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+    font-size: 16px;
+    line-height: 16px;
+    @include FCata700;
+    position: relative;
+
+    &:hover {
+        background-color: $btn-secondary;
+        box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+        transform: translateY(-5px);
+    }
+}
+
+.inner {
+    padding: 70px 0;
+}
+
+.text-output-wrapper {
+    h2 {
+        padding-bottom: 5px;
+        padding-top: 15px;
+    }
+    p {
+        padding-bottom: 10px;
+    }
+    ol,
+    ul {
+        padding-bottom: 10px;
+    }
+    li {
+        list-style-type: circle;
+    }
+    li {
+        margin-left: 20px;
+    }
+    i {
+        padding-right: 10px;
+    }
+}

@@ -1,0 +1,104 @@
+@media (max-width: 1400px) {
+    .header {
+        .container {
+            max-width: 1200px + 30px;
+        }
+        .lang-dropdown {
+            font-size: 16px;
+            line-height: 19px;
+            margin-left: auto;
+        }
+
+        &__menu-btn {
+            // display: block;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            padding: 0;
+            cursor: pointer;
+            position: relative;
+            z-index: 15;
+
+            height: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            &::before,
+            &::after {
+                content: '';
+                width: 24px;
+                height: 3px;
+                background-color: $primary;
+                display: block;
+                // margin-bottom: 4px;
+                transition: all 0.3s;
+                border-radius: 4px;
+            }
+            &::after {
+                margin-bottom: 0;
+                // margin-left: auto;
+            }
+            margin-left: 35px;
+        }
+        &__menu-btn-line {
+            background-color: $primary;
+            width: 24px;
+            display: block;
+            height: 3px;
+            // margin-bottom: 4px;
+            opacity: 1;
+            transition: all 1.3s;
+            border-radius: 4px;
+        }
+        &__menu-btn.active {
+            .header__menu-btn-line {
+                opacity: 0;
+                transition: all 0s;
+            }
+            &::after {
+                width: 24px;
+                transform: translateY(-7px) rotate(-135deg);
+            }
+            &::before {
+                transform: translateY(8px) rotate(135deg);
+            }
+        }
+
+        &__menu {
+            position: absolute;
+            z-index: 10;
+            width: 100%;
+            height: 100vh;
+            left: 0%;
+            top: 0;
+            background-color: #1d1d1d;
+            opacity: 0;
+            pointer-events: none; /* Disable interactions when hidden */
+            transition: opacity 0.3s ease-in-out; /* Add transition for opacity */
+        }
+        &__menu.active {
+            width: 100vw;
+        }
+        &__menu.active {
+            opacity: 1;
+            pointer-events: auto; /* Enable interactions when visible */
+        }
+        &__menu-items {
+            font-size: 30px;
+            line-height: 37px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100%;
+            padding: 32px 30px;
+        }
+        &__menu-item {
+            margin-left: 0 !important;
+            &:hover {
+                color: $secondary;
+            }
+            margin-bottom: 40px;
+        }
+    }
+}

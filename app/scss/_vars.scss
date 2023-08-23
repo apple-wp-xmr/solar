@@ -1,0 +1,58 @@
+@mixin FCata100 {
+    font-family: 'Catamaran', sans-serif;
+    font-weight: 100;
+    font-style: normal;
+}
+
+@mixin FCata400 {
+    font-family: 'Catamaran', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+@mixin FCata500 {
+    font-family: 'Catamaran', sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+@mixin FCata600 {
+    font-family: 'Catamaran', sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+@mixin FCata700 {
+    font-family: 'Catamaran', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+@mixin FCata800 {
+    font-family: 'Catamaran', sans-serif;
+    font-weight: 800;
+    font-style: normal;
+}
+
+@mixin FCata900 {
+    font-family: 'Catamaran', sans-serif;
+    font-weight: 900;
+    font-style: normal;
+}
+
+$black: #101010;
+
+$white: #ffff;
+$whiteSmoke: #e2e0d9;
+
+$primary: #2aa408;
+$light-primary: lighten($primary, 20%);
+$primary-super-light: lighten($primary, 30%);
+$primaryDarken: darken($primary, 10%);
+$primaryComplement: complement($primary);
+
+$secondary: #aeaeae;
+
+$linen: #e7dfd5;
+
+$btn-secondary: #ffae00;
