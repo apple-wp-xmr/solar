@@ -109,4 +109,13 @@
         line-height: 40px;
         padding-bottom: 15px;
     }
+
+    .header {
+        .logo {
+            max-width: 120px;
+        }
+        &__inner {
+            margin: 5px;
+        }
+    }
 }
