@@ -189,6 +189,7 @@ i {
     line-height: 16px;
     @include FCata700;
     position: relative;
+    text-transform: capitalize;
 
     &:hover {
         background-color: $btn-secondary;

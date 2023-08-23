@@ -26,20 +26,9 @@
     }
     &__contact {
         background-color: #f6a235;
-        padding: 17px 32px;
-        color: white;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
         p {
             padding-left: 10px;
             text-transform: capitalize;
-        }
-        margin-right: 20px;
-        cursor: pointer;
-        transition: all 0.4s ease-in-out;
-        &:hover {
-            background-color: #1a1819;
         }
         i {
             color: white;

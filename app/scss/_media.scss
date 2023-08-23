@@ -109,6 +109,16 @@
         line-height: 40px;
         padding-bottom: 15px;
     }
+    .main-button {
+        width: 130px;
+        height: 40px;
+        font-size: 14px;
+        line-height: 14px;
+    }
+
+    .inner {
+        padding: 60px 0;
+    }
 
     .header {
         .logo {
@@ -116,6 +126,62 @@
         }
         &__inner {
             margin: 5px;
+        }
+    }
+    .section-1 {
+        min-height: calc(100vh - 60px);
+        &__lead {
+            color: white;
+            font-size: 58px;
+            line-height: 65px;
+            margin-bottom: 20px;
+        }
+        &__text-outline {
+            bottom: -50px;
+            font-size: 120px;
+            letter-spacing: 30px;
+            line-height: 125px;
+        }
+    }
+    .about {
+        &__box {
+            max-width: 420px;
+            padding: 20px;
+        }
+    }
+    .section-2 {
+        &__inner {
+            flex-direction: column-reverse;
+            align-items: center;
+        }
+    }
+    .section-3 {
+        &__plates {
+            .plate {
+                margin: 0 auto;
+            }
+        }
+    }
+    .introduction {
+        &__image-wrapper {
+            height: 560px;
+            width: 380px;
+            img {
+                width: 450px;
+                height: 450px;
+                top: 35px;
+                right: 35px;
+            }
+        }
+        &__content {
+            max-width: 360px;
+            bottom: -40px;
+            padding: 65px 22px 95px;
+        }
+        &__text {
+            padding-bottom: 30px;
+            font-size: 15px;
+            line-height: 24px;
         }
     }
 }
