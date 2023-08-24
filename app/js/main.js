@@ -510,3 +510,53 @@ var granimInstance = new Granim({
         },
     },
 });
+
+// lang toggle
+class LangDropdown {
+    constructor() {
+        this.dropdown = document.querySelector('.lang-dropdown');
+        this.isDropdownActive = false;
+
+        // Store a reference to the toggleDropdown function
+        this.toggleDropdownHandler = (e) => {
+            this.toggleDropdown(e);
+        };
+
+        // Add a listener to the dropdown for toggling
+        this.dropdown.addEventListener('click', this.toggleDropdownHandler);
+
+        // Check the window width initially
+        this.checkWindowWidth();
+
+        // Add a listener to check the window width on resize
+        window.addEventListener('resize', () => {
+            this.checkWindowWidth();
+        });
+    }
+
+    toggleDropdown(e) {
+        e.stopPropagation();
+
+        if (window.innerWidth < 600) {
+            this.isDropdownActive = !this.isDropdownActive;
+            this.dropdown.classList.toggle('active', this.isDropdownActive);
+        }
+    }
+
+    checkWindowWidth() {
+        if (window.innerWidth < 600) {
+            // Enable the click event for small screens
+            this.dropdown.addEventListener('click', this.toggleDropdownHandler);
+        } else {
+            // Remove the click event for larger screens
+            this.dropdown.removeEventListener('click', this.toggleDropdownHandler);
+
+            // Close the dropdown on larger screens
+            this.isDropdownActive = false;
+            this.dropdown.classList.remove('active');
+        }
+    }
+}
+
+// Create an instance of LangDropdown
+const langSwitch = new LangDropdown();

@@ -8,6 +8,13 @@
             line-height: 19px;
             margin-left: auto;
         }
+        .lang-dropdown.active {
+            .lang-dropdown__item {
+                opacity: 1;
+                transform: translateY(0);
+                pointer-events: auto;
+            }
+        }
 
         &__menu-btn {
             // display: block;
@@ -234,6 +241,21 @@
     }
 
     .lead {
+        font-size: 30px;
+        line-height: 36px;
+        padding-bottom: 12px;
+        text-align: center;
+    }
+    .intro {
+        font-size: 14px;
+        text-align: center;
+        max-width: 80%;
+        margin: 0 auto;
+
+        &::before {
+            left: 50%;
+            transform: translateX(-50%);
+        }
     }
     .main-button {
     }
@@ -243,29 +265,57 @@
 
     .header {
         .logo {
-            max-width: 120px;
+            max-width: 100px;
+            padding-right: 10px;
+            margin-right: 17px;
         }
         &__inner {
             margin: 5px;
         }
+        .container-header {
+            padding: 0 5px;
+        }
     }
     .section-1 {
-        min-height: calc(100vh - 60px);
+        min-height: max(400px, calc(100vh - 60px));
         &__lead {
+            font-size: 46px;
+            line-height: 70px;
+            margin-bottom: 57px;
         }
         &__text-outline {
             bottom: -20px;
-            font-size: 40px;
-            letter-spacing: 20px;
-            line-height: 45px;
+            font-size: 70px;
+            letter-spacing: 10px;
+            line-height: 73px;
+        }
+        &__inner {
+            padding: 0;
+            position: absolute;
+            bottom: 20%;
         }
     }
     .about {
+        &__inner {
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         &__box {
+            margin-left: 0;
+            width: 80%;
+            min-width: 300px;
         }
     }
     .section-2 {
         &__inner {
+        }
+        &__title {
+            margin-left: 20px;
         }
     }
     .section-3 {
@@ -274,42 +324,64 @@
                 margin: 0 auto;
                 width: initial;
                 padding: 0px;
+                &__media-wrapper {
+                    max-width: 100%;
+                }
             }
         }
     }
     .introduction {
+        &__inner {
+            padding: 0 10px;
+        }
+
+        &__box {
+            max-width: 550px;
+            display: block;
+            margin: 0 auto;
+        }
         &__image-wrapper {
+            width: 80%;
+            position: static;
             img {
+                width: 80%;
+                right: unset;
+                left: 0;
             }
         }
         &__content {
-        }
-        &__text {
+            max-width: 100%;
         }
     }
     .section-4 {
+        &__input {
+            width: 90%;
+            margin: 0 auto;
+        }
         .calculation {
+            padding-bottom: 30px;
+
             .lines {
                 height: 500px;
                 position: relative;
                 &__line-item-3 {
                     width: 26px;
                     height: 100%;
-                    left: 30%;
+                    left: 10%;
                     transform: translateY(0);
                     top: 0;
                 }
                 &__line-item-2 {
                     width: 26px;
                     height: 50%;
-                    left: 30%;
+                    left: 10%;
                     transform: translateY(0);
                     top: 0;
                 }
                 &__line-item-1 {
                     width: 26px;
                     height: 25%;
-                    left: 30%;
+                    left: 10%;
                     transform: translateY(0);
                     top: 0;
                 }
@@ -317,11 +389,30 @@
                     height: 100%;
                     flex-direction: column;
                     justify-content: space-evenly;
+                    align-items: center;
+                    .number {
+                        align-items: flex-start;
+                        &::after {
+                            left: -22px;
+                            top: -2%;
+                            transform: rotate(90deg);
+                        }
+                    }
+                    .number--hidden {
+                        height: 40px;
+                    }
                 }
                 &__time {
                     display: none;
                 }
             }
+        }
+    }
+    .partners {
+        &__inner {
+        }
+        &__item + .partners__item {
+            margin-left: 10px;
         }
     }
     .section-5 {
@@ -334,6 +425,8 @@
         &__img {
         }
         &__list {
+            row-gap: 20px;
+            grid-template-columns: 1fr;
         }
     }
     .section-7 {
