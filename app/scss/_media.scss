@@ -184,4 +184,163 @@
             line-height: 24px;
         }
     }
+    .section-5 {
+        &__inner {
+            flex-direction: column;
+        }
+        &__overview {
+            text-align: center;
+        }
+        &__intro {
+            display: inline-block;
+            margin: 0 auto;
+            text-align: left;
+        }
+        &__img {
+            display: inline-block;
+        }
+        &__list {
+            flex-basis: initial;
+            grid-template-columns: repeat(2, 200px);
+            justify-content: space-evenly;
+            row-gap: 40px;
+        }
+    }
+    .section-7 {
+        &__content {
+            flex-direction: column;
+            align-items: center;
+        }
+        .form-wrapper {
+            width: 80%;
+        }
+    }
+}
+
+@media (max-width: 700px) {
+    body {
+        &::-webkit-scrollbar-thumb {
+            background: #272525;
+            border-radius: 3px;
+        }
+
+        &::-webkit-scrollbar {
+            width: 5px;
+            background: #413e3e;
+        }
+    }
+    .container {
+        padding: 0 5px;
+    }
+
+    .lead {
+    }
+    .main-button {
+    }
+
+    .inner {
+    }
+
+    .header {
+        .logo {
+            max-width: 120px;
+        }
+        &__inner {
+            margin: 5px;
+        }
+    }
+    .section-1 {
+        min-height: calc(100vh - 60px);
+        &__lead {
+        }
+        &__text-outline {
+            bottom: -20px;
+            font-size: 40px;
+            letter-spacing: 20px;
+            line-height: 45px;
+        }
+    }
+    .about {
+        &__box {
+        }
+    }
+    .section-2 {
+        &__inner {
+        }
+    }
+    .section-3 {
+        &__plates {
+            .plate {
+                margin: 0 auto;
+                width: initial;
+                padding: 0px;
+            }
+        }
+    }
+    .introduction {
+        &__image-wrapper {
+            img {
+            }
+        }
+        &__content {
+        }
+        &__text {
+        }
+    }
+    .section-4 {
+        .calculation {
+            .lines {
+                height: 500px;
+                position: relative;
+                &__line-item-3 {
+                    width: 26px;
+                    height: 100%;
+                    left: 30%;
+                    transform: translateY(0);
+                    top: 0;
+                }
+                &__line-item-2 {
+                    width: 26px;
+                    height: 50%;
+                    left: 30%;
+                    transform: translateY(0);
+                    top: 0;
+                }
+                &__line-item-1 {
+                    width: 26px;
+                    height: 25%;
+                    left: 30%;
+                    transform: translateY(0);
+                    top: 0;
+                }
+                &__KPI {
+                    height: 100%;
+                    flex-direction: column;
+                    justify-content: space-evenly;
+                }
+                &__time {
+                    display: none;
+                }
+            }
+        }
+    }
+    .section-5 {
+        &__inner {
+        }
+        &__overview {
+        }
+        &__intro {
+        }
+        &__img {
+        }
+        &__list {
+        }
+    }
+    .section-7 {
+        &__content {
+        }
+        .form-wrapper {
+            width: 100%;
+        }
+    }
 }

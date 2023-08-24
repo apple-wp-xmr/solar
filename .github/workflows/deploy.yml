@@ -1,40 +1,29 @@
-name: Copy App Folder to Show Branch
-
-on:
-    push:
-        branches:
-            - master
-
+name: create page
+on: push
 jobs:
-    copy_app_folder:
+    deploy:
+        permissions:
+            pages: write
+            id-token: write
+
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+
         runs-on: ubuntu-latest
 
         steps:
-            - name: Check out code
+            - name: Checkout code
               uses: actions/checkout@v2
 
-            - name: Check if 'show' branch exists
-              run: |
-                  if git show-ref --quiet refs/heads/show; then
-                    git checkout show
-                  else
-                    git checkout -b show
-                  fi
+            - name: Setup Pages
+              uses: actions/configure-pages@v2
 
-            - name: Copy App Folder
+            - name: Upload artifact
+              uses: actions/upload-pages-artifact@v1
+              with:
+                  path: ./app
 
-              run: |
-                  git config --global user.email "mytest@example.com"
-                  git config --global user.name "Dms"
-
-                  # Copy the contents of the 'app' folder from the 'master' branch
-                  git checkout master -- app/
-
-                  # Commit the changes
-                  git commit -m "Copy 'app' folder from 'master' to 'show' branch"
-
-                  # Push the changes to the 'show' branch
-                  git push origin show
-
-            - name: Complete Workflow
-              run: echo "App folder copied to 'show' branch."
+            - name: Deploy to GitHub Pages
+              id: deployment
+              uses: actions/deploy-pages@v1
