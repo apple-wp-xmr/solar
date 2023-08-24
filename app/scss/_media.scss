@@ -416,24 +416,32 @@
         }
     }
     .section-5 {
-        &__inner {
+        &__list-item {
+            text-align: center;
         }
-        &__overview {
-        }
-        &__intro {
-        }
-        &__img {
-        }
+
         &__list {
             row-gap: 20px;
             grid-template-columns: 1fr;
         }
     }
-    .section-7 {
-        &__content {
+    .section-8 {
+        &__inner {
+            padding-top: 20px;
         }
-        .form-wrapper {
-            width: 100%;
+    }
+    .section-6 {
+        &__inner {
+            padding: 0;
+        }
+        .tiles {
+            flex-direction: column;
+            align-items: center;
+            &__item {
+                max-width: 80%;
+                width: 80%;
+                margin-bottom: 170px;
+            }
         }
     }
 }
