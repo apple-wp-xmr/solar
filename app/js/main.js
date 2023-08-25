@@ -300,201 +300,212 @@ userCollector.fetchIP();
     }
 })();
 
-window.addEventListener('DOMContentLoaded', () => {
+(function () {
+    class RangeSlidingValue {
+        constructor(id) {
+            this.input = document.getElementById(id);
+            this.output = this.input.parentElement.querySelector('[data-output]');
+            this.init();
+        }
+
+        init() {
+            this.input.addEventListener('input', this.update.bind(this));
+            this.update();
+        }
+
+        update(e) {
+            let value = this.input.value;
+            if (e) {
+                value = e.target?.value;
+            }
+            let { min, max } = this.input;
+
+            let numberWidth = parseFloat(window.getComputedStyle(this.output).width);
+            let rangeWidth = parseFloat(window.getComputedStyle(this.input).width);
+            let rangeWidthIncThumb = rangeWidth - 34;
+
+            let relativeValue = (value - min) / (max - min);
+            let absoluteLeftForNumber = rangeWidthIncThumb * relativeValue;
+
+            let absoluteLeftForNumberCentred = absoluteLeftForNumber + 34 / 2 - numberWidth / 2;
+            this.output.style.left = `${absoluteLeftForNumberCentred}px`; // Set left position of the output element
+
+            let number = this.output.firstElementChild;
+            number.innerHTML = `${value}<span>kWt</span>`;
+        }
+    }
+
     const r1 = new RangeSlidingValue('range-1');
     const r2 = new RangeSlidingValue('range-2');
-});
-class RangeSlidingValue {
-    constructor(id) {
-        this.input = document.getElementById(id);
-        this.output = this.input.parentElement.querySelector('[data-output]');
-        this.init();
-    }
+})();
 
-    init() {
-        this.input.addEventListener('input', this.update.bind(this));
-        this.update();
-    }
+// solar calculator
+(function () {
+    class SolarCalculator {
+        constructor(power, consumption) {
+            this.power = document.querySelector(power);
+            this.consumption = document.querySelector(consumption);
+            this.consumptionValue = 0;
+            this.generation = 25;
 
-    update(e) {
-        let value = this.input.value;
-        if (e) {
-            value = e.target?.value;
+            this.kWhPriceInEuro = 0.485;
+            this.PVOUT = 1046;
+
+            this.generationPerYear = document.querySelector('#generationPerYear');
+            this.generationPer5Years = document.querySelector('#generationPer5Years');
+
+            this.val1 = document.querySelector('#number-1');
+            this.val2 = document.querySelector('#number-2');
+            this.val3 = document.querySelector('#number-3');
+
+            this.listen();
+            this.calculate();
         }
-        let { min, max } = this.input;
 
-        let numberWidth = parseFloat(window.getComputedStyle(this.output).width);
-        let rangeWidth = parseFloat(window.getComputedStyle(this.input).width);
-        let rangeWidthIncThumb = rangeWidth - 34;
+        listen(power, consumption) {
+            this.power.addEventListener('input', this.updateGeneration.bind(this));
+            this.consumption.addEventListener('input', this.updateConsumption.bind(this));
+        }
 
-        let relativeValue = (value - min) / (max - min);
-        let absoluteLeftForNumber = rangeWidthIncThumb * relativeValue;
+        updateGeneration(e) {
+            this.generation = e.target?.value;
+            this.calculate();
+        }
+        updateConsumption(e) {
+            this.consumptionValue = e.target?.value * 12;
+            this.calculate();
+        }
 
-        let absoluteLeftForNumberCentred = absoluteLeftForNumber + 34 / 2 - numberWidth / 2;
-        this.output.style.left = `${absoluteLeftForNumberCentred}px`; // Set left position of the output element
+        calculate() {
+            this.output = (this.PVOUT * this.generation).toFixed(2);
+            this.netProfit = (this.output * this.kWhPriceInEuro - this.consumptionValue).toFixed(2);
+            this.netProfit = Math.max(0, this.netProfit);
+            this.updateOutPut();
+        }
 
-        let number = this.output.firstElementChild;
-        number.innerHTML = `${value}<span>kWt</span>`;
+        updateOutPut() {
+            this.generationPerYear.innerHTML = `${this.output}<span>KWh</span>`;
+            this.generationPer5Years.innerHTML = `${this.output * 5}<span>KWh</span>`;
+
+            this.val1.innerHTML = this.netProfit;
+            this.val2.innerHTML = (this.netProfit * 5).toFixed(2);
+            this.val3.innerHTML = (this.netProfit * 10).toFixed(2);
+        }
     }
-}
+    const calculator = new SolarCalculator('#range-1', '#range-2');
+})();
 
-class SolarCalculator {
-    constructor(power, consumption) {
-        this.power = document.querySelector(power);
-        this.consumption = document.querySelector(consumption);
-        this.consumptionValue = 0;
-        this.generation = 25;
+// menu class
 
-        this.kWhPriceInEuro = 0.485;
-        this.PVOUT = 1046;
-
-        this.generationPerYear = document.querySelector('#generationPerYear');
-        this.generationPer5Years = document.querySelector('#generationPer5Years');
-
-        this.val1 = document.querySelector('#number-1');
-        this.val2 = document.querySelector('#number-2');
-        this.val3 = document.querySelector('#number-3');
-
-        this.listen();
-        this.calculate();
-    }
-
-    listen(power, consumption) {
-        this.power.addEventListener('input', this.updateGeneration.bind(this));
-        this.consumption.addEventListener('input', this.updateConsumption.bind(this));
-    }
-
-    updateGeneration(e) {
-        this.generation = e.target?.value;
-        this.calculate();
-    }
-    updateConsumption(e) {
-        this.consumptionValue = e.target?.value * 12;
-        this.calculate();
-    }
-
-    calculate() {
-        this.output = (this.PVOUT * this.generation).toFixed(2);
-        this.netProfit = (this.output * this.kWhPriceInEuro - this.consumptionValue).toFixed(2);
-        this.netProfit = Math.max(0, this.netProfit);
-        this.updateOutPut();
-    }
-
-    updateOutPut() {
-        this.generationPerYear.innerHTML = `${this.output}<span>KWh</span>`;
-        this.generationPer5Years.innerHTML = `${this.output * 5}<span>KWh</span>`;
-
-        this.val1.innerHTML = this.netProfit;
-        this.val2.innerHTML = (this.netProfit * 5).toFixed(2);
-        this.val3.innerHTML = (this.netProfit * 10).toFixed(2);
-    }
-}
-const calculator = new SolarCalculator('#range-1', '#range-2');
-
-class MenuClass {
-    constructor(btnID, menuItemClass, menuClass) {
-        this.menuBtn = document.querySelector(btnID);
-        this.menuItems = document.querySelectorAll(menuItemClass);
-        this.menu = document.querySelector(menuClass);
-        this.menuIsOpen = false;
-        this.init();
-    }
-    init() {
-        this.menuBtn.addEventListener('click', this.toggleMenu.bind(this));
-        this.menuItems.forEach((item) => {
-            item.addEventListener('click', this.handleMenuItemClick.bind(this));
-        });
-    }
-    toggleMenu() {
-        if (!this.menuIsOpen) {
-            this.openMenu();
-        } else {
+(function () {
+    class MenuClass {
+        constructor(btnID, menuItemClass, menuClass) {
+            this.menuBtn = document.querySelector(btnID);
+            this.menuItems = document.querySelectorAll(menuItemClass);
+            this.menu = document.querySelector(menuClass);
+            this.menuIsOpen = false;
+            this.init();
+        }
+        init() {
+            this.menuBtn.addEventListener('click', this.toggleMenu.bind(this));
+            this.menuItems.forEach((item) => {
+                item.addEventListener('click', this.handleMenuItemClick.bind(this));
+            });
+        }
+        toggleMenu() {
+            if (!this.menuIsOpen) {
+                this.openMenu();
+            } else {
+                this.closeMenu();
+            }
+        }
+        handleMenuItemClick(e) {
+            e.stopPropagation();
             this.closeMenu();
         }
-    }
-    handleMenuItemClick(e) {
-        e.stopPropagation();
-        this.closeMenu();
-    }
-    openMenu() {
-        this.menuIsOpen = true;
-        this.menuBtn.classList.add('active');
-        this.menu.classList.add('active');
+        openMenu() {
+            this.menuIsOpen = true;
+            this.menuBtn.classList.add('active');
+            this.menu.classList.add('active');
 
-        // Disable scrolling and move to the top of the page
-        document.body.style.overflow = 'hidden';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Disable scrolling and move to the top of the page
+            document.body.style.overflow = 'hidden';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        closeMenu() {
+            this.menuIsOpen = false;
+            this.menuBtn.classList.remove('active');
+            this.menu.classList.remove('active');
+
+            // Enable scrolling and return to the original scroll position
+            document.body.style.overflow = '';
+        }
     }
-    closeMenu() {
-        this.menuIsOpen = false;
-        this.menuBtn.classList.remove('active');
-        this.menu.classList.remove('active');
 
-        // Enable scrolling and return to the original scroll position
-        document.body.style.overflow = '';
-    }
-}
+    const menuButtonSelector = '#menuBtn';
+    const menuItemSelector = '.header__menu-item';
+    const menuContainerSelector = '.header__menu';
 
-const menuButtonSelector = '#menuBtn';
-const menuItemSelector = '.header__menu-item';
-const menuContainerSelector = '.header__menu';
-
-new MenuClass(menuButtonSelector, menuItemSelector, menuContainerSelector);
+    new MenuClass(menuButtonSelector, menuItemSelector, menuContainerSelector);
+})();
 
 // player
+document.addEventListener(
+    'DOMContentLoaded',
+    (function () {
+        const plyrOptions = {
+            controls: [],
+            muted: true,
+            disableContextMenu: true,
+            loop: {
+                active: true,
+            },
+            clickToPlay: false,
+            fullscreen: {
+                enabled: false,
+            },
+        };
+        const playerElm1 = document.querySelector('#plate__media-1');
+        const player1 = new Plyr('#plate_player-1', plyrOptions);
+        player1.poster = 'images/section3/left.jpg';
 
-const plyrOptions = {
-    controls: [],
-    muted: true,
-    disableContextMenu: true,
-    loop: {
-        active: true,
-    },
-    clickToPlay: false,
-    fullscreen: {
-        enabled: false,
-    },
-};
-const playerElm1 = document.querySelector('#plate__media-1');
-const player1 = new Plyr('#plate_player-1', plyrOptions);
-player1.poster = 'images/section3/left.jpg';
+        const playerElm2 = document.querySelector('#plate__media-2');
+        const player2 = new Plyr('#plate_player-2', plyrOptions);
+        player2.poster = 'images/section3/right.jpg';
 
-const playerElm2 = document.querySelector('#plate__media-2');
-const player2 = new Plyr('#plate_player-2', plyrOptions);
-player2.poster = 'images/section3/right.jpg';
+        const options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: [0.9, 0], // 0% and 60% and 100% of the element
+        };
 
-const options = {
-    root: null,
-    rootMargin: '0px',
-    threshold: [0.9, 0], // 0% and 60% and 100% of the element
-};
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.target.id === 'plate__media-1') {
+                    if (entry.isIntersecting === true && entry.intersectionRatio > 0.8) {
+                        player1.play();
+                    }
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-        if (entry.target.id === 'plate__media-1') {
-            if (entry.isIntersecting === true && entry.intersectionRatio > 0.8) {
-                Swal.fire('vid1');
-                player1.play();
-            }
+                    if (entry.isIntersecting == false) {
+                        player2.stop();
+                    }
+                }
+                if (entry.target.id === 'plate__media-2') {
+                    if (entry.isIntersecting === true && entry.intersectionRatio > 0.8) {
+                        player2.play();
+                    }
 
-            if (entry.isIntersecting == false) {
-                player2.stop();
-            }
-        }
-        if (entry.target.id === 'plate__media-2') {
-            if (entry.isIntersecting === true && entry.intersectionRatio > 0.8) {
-                player2.play();
-            }
+                    if (entry.isIntersecting == false) {
+                        player2.stop();
+                    }
+                }
+            });
+        }, options);
 
-            if (entry.isIntersecting == false) {
-                player2.stop();
-            }
-        }
-    });
-}, options);
-
-observer.observe(playerElm1);
-observer.observe(playerElm2);
+        observer.observe(playerElm1);
+        observer.observe(playerElm2);
+    })()
+);
 
 // gradient
 
@@ -549,5 +560,36 @@ class LangDropdown {
     }
 }
 
-// Create an instance of LangDropdown
 const langSwitch = new LangDropdown();
+
+// scroll to form on button click
+(function () {
+    let buttonsList = document.querySelectorAll('.toForm');
+    buttonsList.forEach((button) => {
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+            const formElement = document.getElementById('form');
+            if (formElement) {
+                formElement.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+})();
+
+// -----------------errors-------------------------------------
+// Add a global error handler to capture unhandled exceptions
+window.onerror = function (message, source, lineno, colno, error) {
+    console.error('Error:', message);
+    console.error('Source:', source);
+    console.error('Line Number:', lineno);
+    console.error('Column Number:', colno);
+    console.error('Error Object:', error);
+};
+
+// try {
+//     // Example of a deliberate error for testing
+//     throw new Error('This is a test error.');
+// } catch (error) {
+//     // Handle the error or log it to the console
+//     console.error('Caught Error:', error);
+// }
