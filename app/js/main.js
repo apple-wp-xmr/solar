@@ -467,11 +467,31 @@ document.addEventListener(
         };
         const playerElm1 = document.querySelector('#plate__media-1');
         const player1 = new Plyr('#plate_player-1', plyrOptions);
-        player1.poster = 'images/section3/left.jpg';
+
+        player1.source = {
+            type: 'video',
+            sources: [
+                {
+                    src: './images/videos/plate1.mp4',
+                    type: 'video/mp4',
+                },
+            ],
+            poster: 'images/section3/left.jpg',
+        };
 
         const playerElm2 = document.querySelector('#plate__media-2');
         const player2 = new Plyr('#plate_player-2', plyrOptions);
-        player2.poster = 'images/section3/right.jpg';
+
+        player2.source = {
+            type: 'video',
+            sources: [
+                {
+                    src: './images/videos/plate2.mp4',
+                    type: 'video/mp4',
+                },
+            ],
+            poster: 'images/section3/right.jpg',
+        };
 
         const options = {
             root: null,
@@ -487,7 +507,7 @@ document.addEventListener(
                     }
 
                     if (entry.isIntersecting == false) {
-                        player2.stop();
+                        player1.stop();
                     }
                 }
                 if (entry.target.id === 'plate__media-2') {
@@ -576,20 +596,13 @@ const langSwitch = new LangDropdown();
     });
 })();
 
-// -----------------errors-------------------------------------
+// --------------------------errors-------------------------------------
 // Add a global error handler to capture unhandled exceptions
 window.onerror = function (message, source, lineno, colno, error) {
+    console.log('my custom error');
     console.error('Error:', message);
     console.error('Source:', source);
     console.error('Line Number:', lineno);
     console.error('Column Number:', colno);
     console.error('Error Object:', error);
 };
-
-// try {
-//     // Example of a deliberate error for testing
-//     throw new Error('This is a test error.');
-// } catch (error) {
-//     // Handle the error or log it to the console
-//     console.error('Caught Error:', error);
-// }

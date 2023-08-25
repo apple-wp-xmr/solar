@@ -72,6 +72,12 @@ gulp.task('browser-sync', function () {
             baseDir: 'app/',
         },
         tunnel: true,
+        ghostMode: {
+            clicks: false, // Disable clicks synchronization
+            forms: false, // Disable form input synchronization
+            scroll: false, // Disable scroll synchronization
+        },
+        tunnel: 'floppy-zebra',
     });
 });
 
