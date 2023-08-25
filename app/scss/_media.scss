@@ -460,5 +460,16 @@
         .pageSecond__text {
             max-width: 300px;
         }
+        .pageSecond {
+            &__text--about-systems {
+                max-width: 300px;
+                margin: 0 auto;
+            }
+        }
+    }
+    .section-7 {
+        .form {
+            padding: 10px 15px;
+        }
     }
 }
