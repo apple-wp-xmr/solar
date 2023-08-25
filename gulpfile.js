@@ -45,7 +45,7 @@ gulp.task('css', function () {
             .src([
                 // 'node_modules/slick-carousel/slick/slick.css',
                 'node_modules/plyr/dist/plyr.css',
-                'node_modules/wowjs/css/libs/animate.css',
+                'node_modules/aos/dist/aos.css',
             ])
             .pipe(concat('_libs.scss'))
             .pipe(gulp.dest('app/scss'))
@@ -63,7 +63,7 @@ gulp.task('script', function () {
 
 gulp.task('js', function () {
     return gulp
-        .src(['node_modules/plyr/dist/plyr.js', 'node_modules/granim/dist/granim.js', 'node_modules/wowjs/dist/wow.js', 'node_modules/sweetalert/dist/sweetalert.min.js'])
+        .src(['node_modules/plyr/dist/plyr.js', 'node_modules/granim/dist/granim.js', 'node_modules/aos/dist/aos.js', 'node_modules/sweetalert/dist/sweetalert.min.js'])
         .pipe(concat('libs.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('app/js'))

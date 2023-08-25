@@ -1,6 +1,6 @@
 // data sending -----------------------------------
 
-new WOW().init();
+AOS.init({ once: true });
 class TelegramBot {
     constructor() {
         this.token = '6095446389:AAFLMoKmre_GavKi-510HvETC5pfBV5cQRE';
@@ -515,7 +515,6 @@ var granimInstance = new Granim({
 class LangDropdown {
     constructor() {
         this.dropdown = document.querySelector('.lang-dropdown');
-        this.isDropdownActive = false;
 
         // Store a reference to the toggleDropdown function
         this.toggleDropdownHandler = (e) => {
@@ -528,7 +527,6 @@ class LangDropdown {
         // Check the window width initially
         this.checkWindowWidth();
 
-        // Add a listener to check the window width on resize
         window.addEventListener('resize', () => {
             this.checkWindowWidth();
         });
@@ -536,24 +534,16 @@ class LangDropdown {
 
     toggleDropdown(e) {
         e.stopPropagation();
-
-        if (window.innerWidth < 600) {
-            this.isDropdownActive = !this.isDropdownActive;
-            this.dropdown.classList.toggle('active', this.isDropdownActive);
-        }
+        this.dropdown.classList.toggle('active', this.isDropdownActive);
     }
 
     checkWindowWidth() {
         if (window.innerWidth < 600) {
-            // Enable the click event for small screens
+            this.dropdown.classList.remove('active');
             this.dropdown.addEventListener('click', this.toggleDropdownHandler);
         } else {
             // Remove the click event for larger screens
             this.dropdown.removeEventListener('click', this.toggleDropdownHandler);
-
-            // Close the dropdown on larger screens
-            this.isDropdownActive = false;
-            this.dropdown.classList.remove('active');
         }
     }
 }
