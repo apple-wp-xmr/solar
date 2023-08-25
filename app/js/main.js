@@ -473,8 +473,8 @@ const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
         if (entry.target.id === 'plate__media-1') {
             if (entry.isIntersecting === true && entry.intersectionRatio > 0.8) {
-                player1.play();
                 Swal.fire('vid1');
+                player1.play();
             }
 
             if (entry.isIntersecting == false) {
