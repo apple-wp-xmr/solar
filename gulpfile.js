@@ -42,11 +42,7 @@ gulp.task('css', function () {
     return (
         gulp
             //'node_modules/normalize.css/normalize.css',
-            .src([
-                // 'node_modules/slick-carousel/slick/slick.css',
-                'node_modules/plyr/dist/plyr.css',
-                'node_modules/aos/dist/aos.css',
-            ])
+            .src(['node_modules/sweetalert2/dist/sweetalert2.css', 'node_modules/plyr/dist/plyr.css', 'node_modules/aos/dist/aos.css'])
             .pipe(concat('_libs.scss'))
             .pipe(gulp.dest('app/scss'))
             .pipe(browserSync.reload({ stream: true }))
@@ -63,7 +59,7 @@ gulp.task('script', function () {
 
 gulp.task('js', function () {
     return gulp
-        .src(['node_modules/plyr/dist/plyr.js', 'node_modules/granim/dist/granim.js', 'node_modules/aos/dist/aos.js', 'node_modules/sweetalert/dist/sweetalert.min.js'])
+        .src(['node_modules/plyr/dist/plyr.js', 'node_modules/granim/dist/granim.js', 'node_modules/aos/dist/aos.js', 'node_modules/sweetalert2/dist/sweetalert2.all.js'])
         .pipe(concat('libs.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('app/js'))
