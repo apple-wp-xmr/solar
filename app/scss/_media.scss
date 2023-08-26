@@ -471,4 +471,27 @@
             padding: 10px 15px;
         }
     }
+    .footer {
+        &__inner {
+            padding: 20px 0;
+        }
+        &__logo {
+            max-width: 140px;
+            padding-bottom: 10px;
+        }
+        &__bottom {
+            align-items: center;
+        }
+        &__text {
+            max-width: 250px;
+            padding: 0;
+        }
+        .social {
+            flex-direction: column;
+            gap: 10px;
+            &__item {
+                padding: 0 !important;
+            }
+        }
+    }
 }

@@ -172,11 +172,12 @@
     &__intro {
         font-size: 16px;
         font-weight: 700;
+        text-align: center;
     }
     li {
         list-style-type: none;
         position: relative;
-        margin-left: 40px;
+        margin-left: 30px;
         padding-bottom: 20px;
     }
 
@@ -335,6 +336,10 @@
 
     &__plates {
         .plate {
+            &__intro {
+                font-size: 18px;
+                @include FCata900;
+            }
             display: block;
             width: 80%;
             padding: 15px;
@@ -1018,6 +1023,9 @@
     &__bottom {
         display: flex;
         justify-content: space-between;
+    }
+    &__text {
+        max-width: 300px;
     }
 }
 .gradient {
