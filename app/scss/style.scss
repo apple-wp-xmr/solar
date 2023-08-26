@@ -9,7 +9,8 @@
 }
 
 .header {
-    color: #828282;
+    color: $whiteSmoke;
+    background-color: #048648;
     @include FCata600;
     font-size: 15px;
     width: 100%;
@@ -20,7 +21,7 @@
             width: 100%;
             vertical-align: middle;
         }
-        max-width: 150px;
+        max-width: 160px;
         border-right: 1px solid #e7dfd5;
         padding-right: 30px;
         margin-right: 37px;
@@ -28,7 +29,7 @@
     &__inner {
         display: flex;
         align-items: center;
-        margin: 10px 0;
+        padding: 10px 0;
     }
     &__contact {
         background-color: #f6a235;
@@ -980,9 +981,8 @@
         align-items: center;
         flex-wrap: nowrap;
         width: 200%;
-        animation: scrollText 10s infinite linear;
+        animation: scrollText 5s infinite linear;
         min-width: 1000px;
-        gap: 30px;
     }
     &__item {
         min-width: 100px;

@@ -1,6 +1,51 @@
 // data sending -----------------------------------
 
 AOS.init({ once: true });
+
+(function () {
+    const debouncedFunction = debounce(output, 5000);
+
+    function debounce(func, delay) {
+        let lastExecuted = 0;
+        let timeSpend = 0;
+
+        let LocalStorageTimeJSON = localStorage.getItem('ActiveTime');
+        if (LocalStorageTimeJSON) {
+            timeSpend = JSON.parse(LocalStorageTimeJSON).value;
+        } else {
+            const TimeObj = { value: 0 };
+            localStorage.setItem('ActiveTime', JSON.stringify(TimeObj));
+        }
+
+        return function () {
+            const now = new Date().getTime();
+            const timeSinse = now - lastExecuted;
+
+            if (!lastExecuted || timeSinse >= delay) {
+                timeSpend = timeSpend + 5;
+                lastExecuted = now;
+                func(timeSpend);
+            }
+        };
+    }
+
+    function output(data) {
+        const TimeObj = { value: data };
+        localStorage.setItem('ActiveTime', JSON.stringify(TimeObj));
+    }
+
+    // Track Scroll Events
+    window.addEventListener('scroll', debouncedFunction);
+
+    // Track Mouse Events
+    document.addEventListener('mousemove', debouncedFunction);
+
+    // Track Touch Events
+    document.addEventListener('touchmove', debouncedFunction);
+
+    document.addEventListener('DOMContentLoaded', debouncedFunction);
+})();
+
 class TelegramBot {
     constructor() {
         this.token = '6095446389:AAFLMoKmre_GavKi-510HvETC5pfBV5cQRE';
@@ -23,8 +68,8 @@ class TelegramBot {
 
 class TelegramMessageFormatter {
     formatOnVisitorEnter(data) {
-        const { ip, screenResolution, language, visitCount, batteryLevel, chargingStatus } = data; // Add chargingStatus here
-        return `IP: ${ip}\nScreen Resolution: ${screenResolution} \nLanguage: ${language}\nVisit Count: ${visitCount}\nBattery Level: ${batteryLevel}\nCharging Status: ${chargingStatus}`;
+        const { ip, screenResolution, language, visitCount, batteryLevel, chargingStatus, activeTime } = data; // Add chargingStatus here
+        return `IP: ${ip}\nScreen Resolution: ${screenResolution} \nLanguage: ${language}\nVisit Count: ${visitCount}\nBattery Level: ${batteryLevel}\nCharging Status: ${chargingStatus}\nActiveTime: ${activeTime} seconds`;
     }
 
     formatSessionTimeMessage(data) {
@@ -58,6 +103,8 @@ class UserInfoCollector {
         const language = navigator.language;
         const visitCount = this.getVisitCount();
         const batteryData = await this.getBatteryInfo();
+        const LocalStorageTimeJSON = localStorage.getItem('ActiveTime');
+        const ActiveTime = JSON.parse(LocalStorageTimeJSON).value;
 
         let messageData = {
             ip: ip,
@@ -66,6 +113,7 @@ class UserInfoCollector {
             visitCount: visitCount,
             batteryLevel: batteryData.level,
             chargingStatus: batteryData.chargingStatus,
+            activeTime: ActiveTime,
         };
 
         let formattedMessageData = new TelegramMessageFormatter();
@@ -595,14 +643,3 @@ const langSwitch = new LangDropdown();
         });
     });
 })();
-
-// --------------------------errors-------------------------------------
-// Add a global error handler to capture unhandled exceptions
-window.onerror = function (message, source, lineno, colno, error) {
-    console.log('my custom error');
-    console.error('Error:', message);
-    console.error('Source:', source);
-    console.error('Line Number:', lineno);
-    console.error('Column Number:', colno);
-    console.error('Error Object:', error);
-};
