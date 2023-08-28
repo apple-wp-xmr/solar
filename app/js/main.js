@@ -22,9 +22,9 @@ AOS.init({ once: true });
             const timeSinse = now - lastExecuted;
 
             if (!lastExecuted || timeSinse >= delay) {
-                timeSpend = timeSpend + 5;
                 lastExecuted = now;
                 func(timeSpend);
+                timeSpend = timeSpend + 5;
             }
         };
     }

@@ -836,6 +836,15 @@
             }
             padding-bottom: 20px;
         }
+        .farms-list {
+            /* Add your styles here */
+            list-style-type: decimal; /* Change the numbering style (e.g., decimal, lower-alpha, upper-roman) */
+
+            li {
+                list-style-type: decimal;
+                margin-left: 15px;
+            }
+        }
         &__group {
             display: flex;
             gap: 40px;
