@@ -227,32 +227,44 @@ userCollector.fetchIP();
 
 // form logic for the contact form
 (function formLables() {
-    let field = $('.form__box');
-    field.on('click', function () {
-        field.each(function () {
-            let input = $(this).children('textarea , input');
-            if (input.val() == '' && !input.is(':focus')) {
-                $(this).removeClass('active');
-            }
-        });
+    const fields = document.querySelectorAll('.form__box');
 
-        $(this).addClass('active');
-
-        setTimeout(() => {
-            field.each(function () {
-                let input = $(this).children('textarea , input');
-                if (input.val() == '' && !input.is(':focus')) {
-                    $(this).removeClass('active');
+    fields.forEach(function (field) {
+        field.addEventListener('click', function () {
+            fields.forEach(function (field) {
+                const input = field.querySelector('textarea, input');
+                if (input.value === '' && document.activeElement !== input) {
+                    field.classList.remove('active');
                 }
             });
-        }, 3000);
+
+            this.classList.add('active');
+
+            setTimeout(() => {
+                fields.forEach(function (field) {
+                    const input = field.querySelector('textarea, input');
+                    if (input.value === '' && document.activeElement !== input) {
+                        field.classList.remove('active');
+                    }
+                });
+            }, 3000);
+        });
+
+        field.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                this.classList.remove('active');
+                const elem = this.querySelector('input');
+                elem.blur();
+            }
+        });
     });
-    $(document).on('click', function (e) {
-        if (!e.target.matches('.form__box')) {
-            field.each(function () {
-                let input = $(this).children('textarea , input');
-                if (input.val() == '' && !input.is(':focus')) {
-                    $(this).removeClass('active');
+
+    document.addEventListener('click', function (e) {
+        if (!e.target.closest('.form__box')) {
+            fields.forEach(function (field) {
+                const input = field.querySelector('textarea, input');
+                if (input.value === '' && document.activeElement !== input) {
+                    field.classList.remove('active');
                 }
             });
         }
@@ -645,3 +657,315 @@ const langSwitch = new LangDropdown();
         });
     });
 })();
+
+// multistage form logic
+
+const stageOne = `<form class="form form-stage-one">
+<div class="error-alert-top" id='error-alert-top'></div>
+<div class="form__top form__top--primary">
+    <p class="form__lead lead">Instant savings with <span>solar panels</span></p>
+</div>
+<div class="form__content">
+    <p class="form__text text">Welcome to Dak Profijt, the expert in the field of solar panels for your roof!</p>
+    <p class="form__text text">
+        Are you also curious about the possibilities of solar energy and how this can contribute to lower energy costs and a sustainable future?
+    </p>
+    <p class="form__text text text-1">Enter your details and discover how much you can save!</p>
+    <div class="error-alert" id="error-alert"></div>
+    <div class="form__input-group">
+        <div class="form__box">
+            <label for="fname">Postal code</label>
+            <input type="text" id="postalCode" name="postalCode" data-inputName="postalCode" placeholder="1234AB">
+        </div>
+        <div class="form__box">
+            <label for="fname">House number</label>
+            <input type="text" id="houseNumber" name="houseNumber" data-inputName="houseNumber" placeholder="98">
+        </div>
+        <div class="form__box">
+            <label for="fname">Addition</label>
+            <input type="text" id="addition" name="addition" data-inputName="addition" placeholder="a">
+        </div>
+    </div>
+    <button class="main-button" type="button" data-go-to="1">Discover your savings</button>
+</div>
+</form>`;
+
+const stageTwo = `<form class="form form-stage-two">
+<div class="error-alert-top" id="error-alert-top"></div>
+<div class="form__top">
+    <ol class="list">
+        <li class="list__item active">Location</li>
+        <li class="list__item">Choose a plan</li>
+        <li class="list__item">Consumption</li>
+        <li class="list__item">Complete</li>
+    </ol>
+</div>
+<div class="form__content">
+    <p class="form__lead lead">Exact <span>location</span></p>
+    <p class="form__text text-1">Is the pin on the right roof?</p>
+    <div class="location">
+        <div class="location__map" id="myMap"></div>
+        <div class="location__address">
+            <p class="location__street">Dr. Jan Mulderstraat</p>
+            <p class="location__houseNumber">36</p>
+            <p class="location__postcode">1544VC</p>
+            <p class="location__city">Zaandijk</p>
+        </div>
+    </div>
+    <div class="form__buttons-row">
+        <button class="main-button--dim" id="change-location">The pin is wrong</button>
+        <button class="main-button" type="button" data-go-to="2">Discover your savings</button>
+    </div>
+</div>
+</form>`;
+
+const stageThree = ` <form class="form form-stage-three">
+<div class="error-alert-top" id="error-alert-top"></div>
+<div class="form__top">
+    <ol class="list">
+        <li class="list__item active done">Location</li>
+        <li class="list__item active">Choose a plan</li>
+        <li class="list__item">Consumption</li>
+        <li class="list__item">Complete</li>
+    </ol>
+</div>
+<div class="form__content">
+    <p class="form__lead lead"><span>Good news! </span></p>
+    <p class="form__text text-2">The roof of this house seems suitable!</p>
+    <p class="form__text text-1">Choose your roof scan</p>
+
+    <div class="radio">
+        <div class="radio__item">
+            <div class="radio__button">
+                <input type="radio" id="radio-1" name="option-1" value="1" />
+            </div>
+            <p class="radio__title">Personal advice (most chosen)</p>
+            <ul class="radio__list">
+                <li class="radio__list-item">Instant quote and offer</li>
+                <li class="radio__list-item">Estimation of the number of solar panels</li>
+                <li class="radio__list-item">Calculation of yield and payback period</li>
+                <li class="radio__list-item">Expected savings and returns</li>
+                <li class="radio__list-item">Accurate measurement and laying plan</li>
+            </ul>
+        </div>
+        <div class="radio__item">
+            <div class="radio__button">
+                <input type="radio" id="radio-1" name="option-1" value="1" />
+            </div>
+            <p class="radio__title">Personal advice (most chosen)</p>
+            <ul class="radio__list">
+                <li class="radio__list-item">Suitability of the roof</li>
+                <li class="radio__list-item">Estimate number of solar panels</li>
+                <li class="radio__list-item--minus">No personal advice and information</li>
+                <li class="radio__list-item--minus">You don't know what it will cost</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="form__buttons-row">
+        <button class="main-button--dim" id="change-location">Previous</button>
+        <button class="main-button" type="button" data-go-to="2">Next</button>
+    </div>
+</div>
+</form>`;
+
+let formStages = [stageOne, stageTwo, stageThree];
+
+let myFormData = {
+    stage: 0,
+    postalCode: '',
+    houseNumber: '',
+    addition: '',
+    longitude: 4.79918888,
+    latitude: 52.4700737,
+};
+
+let FormWrapper = document.getElementById('form-multyStage-wrapper');
+(function trackInput() {
+    FormWrapper.addEventListener('keyup', function trackKeys(e) {
+        e.stopPropagation();
+        if (e.target.tagName == 'INPUT' && e.target.getAttribute('data-inputname')) {
+            const inputName = e.target.getAttribute('data-inputname');
+            const inputValue = e.target.value;
+            myFormData[inputName] = inputValue;
+        }
+    });
+})();
+
+function StageZeroIn() {
+    $(document).on('ready', function () {
+        $('#postalCode').mask('9999aa');
+        $('#postalCode').on('mouseup', (e) => {
+            e.stopPropagation();
+            let elem = e.currentTarget;
+            elem.setSelectionRange(0, 0);
+        });
+
+        $('#houseNumber').mask('99');
+        $('#houseNumber').on('mouseup', (e) => {
+            e.stopPropagation();
+            let elem = e.currentTarget;
+            elem.setSelectionRange(0, 0);
+        });
+    });
+}
+
+function StageZeroOut() {
+    $('#postalCode').unmask();
+    $('#houseNumber').unmask('99');
+}
+
+function preMultiStageForm() {
+    let stage = myFormData.stage;
+    FormWrapper.innerHTML = formStages[stage];
+    StageZeroIn();
+}
+
+function changeHtml() {
+    FormWrapper.innerHTML = formStages[stage];
+}
+
+async function getLocation() {
+    let stage = myFormData.stage;
+
+    const pattern = /_/g;
+    let postalCode = myFormData.postalCode;
+    postalCode = postalCode.replace(pattern, '');
+
+    let houseNumber = myFormData.houseNumber;
+    houseNumber = houseNumber.replace(pattern, '');
+    if (postalCode.length < 6 || houseNumber.length < 2) {
+        const errorAlert = FormWrapper.querySelector('#error-alert');
+        errorAlert.innerHTML = `<p class="text text-1"><i class='far fa-exclamation-square'></i>There was a problem with your submission. Check the fields below.</p>`;
+        return;
+    }
+
+    const params = new URLSearchParams();
+    params.set('action', 'get_postcode');
+    params.set('security', '2cc101c799');
+    params.set('postcode', postalCode);
+    params.set('huisnummer', houseNumber);
+    params.set('toevoeging', myFormData.addition);
+
+    const url = `https://dakprofijt.nl/wp-admin/admin-ajax.php?${params.toString()}`;
+
+    try {
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+
+        myFormData.latitude = data.latitude;
+        myFormData.longitude = data.longitude;
+        myFormData.street = data.street;
+        myFormData.houseNumber = data.houseNumber;
+        myFormData.city = data.city;
+
+        console.log(data);
+        renderStage(1);
+    } catch (error) {
+        // Handle errors here
+        console.error('Fetch error:', error);
+
+        showTopError('We could not find a valid address. Try searching again.');
+    }
+}
+
+function showTopError(text) {
+    let output = FormWrapper.querySelector('#error-alert-top');
+    output.innerHTML = `<p class="text text-1">${text}</p>`;
+}
+
+preMultiStageForm();
+
+// Initialize and add the map
+
+((g) => {
+    var h,
+        a,
+        k,
+        p = 'The Google Maps JavaScript API',
+        c = 'google',
+        l = 'importLibrary',
+        q = '__ib__',
+        m = document,
+        b = window;
+    b = b[c] || (b[c] = {});
+    var d = b.maps || (b.maps = {}),
+        r = new Set(),
+        e = new URLSearchParams(),
+        u = () =>
+            h ||
+            (h = new Promise(async (f, n) => {
+                await (a = m.createElement('script'));
+                e.set('libraries', [...r] + '');
+                for (k in g)
+                    e.set(
+                        k.replace(/[A-Z]/g, (t) => '_' + t[0].toLowerCase()),
+                        g[k]
+                    );
+                e.set('callback', c + '.maps.' + q);
+                a.src = `https://maps.${c}apis.com/maps/api/js?` + e;
+                d[q] = f;
+                a.onerror = () => (h = n(Error(p + ' could not load.')));
+                a.nonce = m.querySelector('script[nonce]')?.nonce || '';
+                m.head.append(a);
+            }));
+    d[l] ? console.warn(p + ' only loads once. Ignoring:', g) : (d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)));
+})({
+    key: 'AIzaSyA_ywspEMM5plA_l6guCnFBuu17NkcbsxU',
+
+    // Add other bootstrap parameters as needed, using camel case.
+    // Use the 'v' parameter to indicate the version to load (alpha, beta, weekly, etc.)
+});
+
+let map;
+
+async function initMap() {
+    // The location of Uluru
+    const position = { lat: myFormData.latitude, lng: myFormData.longitude };
+    // Request needed libraries.
+    //@ts-ignore
+    const { Map } = await google.maps.importLibrary('maps');
+
+    // The map, centered at Uluru
+    map = new Map(document.getElementById('myMap'), {
+        zoom: 19.2,
+        center: position,
+        mapId: '8debc2d14a1ed077',
+        disableDefaultUI: true,
+        mapTypeId: 'satellite',
+        draggable: false,
+        keyboardShortcuts: false,
+        zoomControl: false, // Disable zoom control
+        scrollwheel: false, // Disable scrollwheel zoom
+        disableDoubleClickZoom: true, // Disable double-click zoom
+    });
+
+    const marker = new google.maps.Marker({
+        // The below line is equivalent to writing:
+        // position: new google.maps.LatLng(-34.397, 150.644)
+        position: { lat: myFormData.latitude, lng: myFormData.longitude },
+        map: map,
+    });
+    // Add an event listener to track marker position
+    google.maps.event.addListener(marker, 'dragend', function (event) {
+        console.log('Marker dragged to:', event.latLng.lat(), event.latLng.lng());
+    });
+    window.marker = marker;
+}
+
+// initMap();
+
+function wrongPin() {
+    marker.setOptions({
+        draggable: true, // Set draggable to true using setOptions
+    });
+    map.setOptions({
+        draggable: true,
+        zoomControl: true,
+    });
+}

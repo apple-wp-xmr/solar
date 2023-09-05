@@ -150,6 +150,16 @@ body {
     line-height: 24px;
     @include FCata400;
 }
+.text-1 {
+    @extend .text;
+    @include FCata400;
+}
+.text-2 {
+    @extend .text;
+    @include FCata100;
+    font-size: 30px;
+    line-height: 33px;
+}
 
 hr {
     border: none;
@@ -161,8 +171,8 @@ hr {
         @include FCata600;
         line-height: 24px;
         font-size: 15px;
-        display: flex;
-        align-items: center;
+        // display: flex;
+        // align-items: center;
         i {
             margin-right: 10px;
         }
@@ -190,13 +200,14 @@ i {
     @include FCata700;
     position: relative;
     text-transform: capitalize;
+    border-radius: 5px;
 }
 @media (min-width: 600px) {
     .main-button {
         &:hover {
             background-color: $btn-secondary;
             box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.04);
         }
     }
 }

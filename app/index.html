@@ -13,6 +13,7 @@
             integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
             crossorigin="anonymous"
             referrerpolicy="no-referrer"></script>
+        <script defer="defer" src="https://dakprofijt.nl/wp-content/plugins/gravityforms/js/jquery.maskedinput.min.js?ver=2.7.13" id="gform_masked_input-js"></script>
     </head>
     <body>
         <header class="header">
@@ -44,7 +45,7 @@
                     <div class="lang-dropdown">
                         <p>EN</p>
                         <div class="lang-dropdown__item">
-                            <a href="./nl">NL</a>
+                            <a href="./nl.html">NL</a>
                         </div>
                     </div>
                     <div class="header__menu-btn" id="menuBtn">
@@ -62,6 +63,64 @@
                 </div>
             </div>
             <span class="section-1__text-outline" data-aos="zoom-in-down" data-aos-offset="-100">Energy</span>
+        </section>
+
+        <section class="quiz">
+            <div class="container">
+                <div class="quiz__inner inner">
+                    <div class="form-wrapper" id="form-multyStage-wrapper">
+                        <form class="form form-stage-three">
+                            <div class="error-alert-top" id="error-alert-top"></div>
+                            <div class="form__top">
+                                <ol class="list">
+                                    <li class="list__item active done">Location</li>
+                                    <li class="list__item active">Choose a plan</li>
+                                    <li class="list__item">Consumption</li>
+                                    <li class="list__item">Complete</li>
+                                </ol>
+                            </div>
+                            <div class="form__content">
+                                <p class="form__lead lead"><span>Good news! </span></p>
+                                <p class="form__text text-2">The roof of this house seems suitable!</p>
+                                <p class="form__text text-1">Choose your roof scan</p>
+
+                                <div class="radio">
+                                    <div class="radio__item">
+                                        <div class="radio__button">
+                                            <input type="radio" id="radio-1" name="option-1" value="1" />
+                                        </div>
+                                        <p class="radio__title">Personal advice (most chosen)</p>
+                                        <ul class="radio__list">
+                                            <li class="radio__list-item">Instant quote and offer</li>
+                                            <li class="radio__list-item">Estimation of the number of solar panels</li>
+                                            <li class="radio__list-item">Calculation of yield and payback period</li>
+                                            <li class="radio__list-item">Expected savings and returns</li>
+                                            <li class="radio__list-item">Accurate measurement and laying plan</li>
+                                        </ul>
+                                    </div>
+                                    <div class="radio__item">
+                                        <div class="radio__button">
+                                            <input type="radio" id="radio-1" name="option-1" value="1" />
+                                        </div>
+                                        <p class="radio__title">Personal advice (most chosen)</p>
+                                        <ul class="radio__list">
+                                            <li class="radio__list-item">Suitability of the roof</li>
+                                            <li class="radio__list-item">Estimate number of solar panels</li>
+                                            <li class="radio__list-item--minus">No personal advice and information</li>
+                                            <li class="radio__list-item--minus">You don't know what it will cost</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="form__buttons-row">
+                                    <button class="main-button--dim" id="change-location">Previous</button>
+                                    <button class="main-button" type="button" data-go-to="2">Next</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </section>
         <section class="about" id="about">
             <div class="container">
@@ -441,31 +500,37 @@
                 </div>
             </div>
         </section>
-        <section class="partners">
-            <div class="container">
-                <p class="partners__title intro">Our partners</p>
-                <div class="partners__inner">
-                    <div class="partners__item">
-                        <a href="https://www.huawei.com/en/">
-                            <img src="images/partners/Picture1.png" alt="" />
-                        </a>
+        <section class="certificates">
+            <!-- <div class="container"> -->
+            <p class="certificates__title intro">Our partners</p>
+            <div class="certificates-wrapper">
+                <div class="certificates__inner--reverse">
+                    <div class="certificates__item">
+                        <img src="images/partners/Picture1.png" alt="" />
                     </div>
-                    <div class="partners__item">
-                        <a href="https://enphase.com/">
-                            <img src="images/partners/Picture2.png" alt="" />
-                        </a>
+                    <div class="certificates__item">
+                        <img src="images/partners/Picture2.png" alt="" />
                     </div>
-                    <div class="partners__item">
-                        <a href="https://easee.com/">
-                            <img src="images/partners/Picture3.png" alt="" />
-                        </a>
+                    <div class="certificates__item">
+                        <img src="images/partners/Picture3.png" alt="" />
                     </div>
-                    <div class="partners__item">
-                        <a href="https://au.growatt.com/">
-                            <img src="images/partners/Picture4.png" alt="" />
-                        </a>
+                    <div class="certificates__item">
+                        <img src="images/partners/Picture4.png" alt="" />
+                    </div>
+                    <div class="certificates__item">
+                        <img src="images/partners/Picture1.png" alt="" />
+                    </div>
+                    <div class="certificates__item">
+                        <img src="images/partners/Picture2.png" alt="" />
+                    </div>
+                    <div class="certificates__item">
+                        <img src="images/partners/Picture3.png" alt="" />
+                    </div>
+                    <div class="certificates__item">
+                        <img src="images/partners/Picture4.png" alt="" />
                     </div>
                 </div>
+                <!-- </div> -->
             </div>
         </section>
         <section class="section-5 ourProjects" id="ourProjects">

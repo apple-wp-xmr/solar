@@ -71,7 +71,7 @@ gulp.task('browser-sync', function () {
         server: {
             baseDir: 'app/',
         },
-        tunnel: true,
+        tunnel: false,
         ghostMode: {
             clicks: false, // Disable clicks synchronization
             forms: false, // Disable form input synchronization
