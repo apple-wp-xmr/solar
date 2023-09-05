@@ -69,7 +69,64 @@
             <div class="container">
                 <div class="quiz__inner inner">
                     <div class="form-wrapper" id="form-multyStage-wrapper">
-                        <form class="form form-stage-three">
+                        <form class="form form-stage-zero">
+                            <div class="error-alert-top" id="error-alert-top"></div>
+                            <div class="form__top form__top--primary">
+                                <p class="form__lead lead">Instant savings with <span>solar panels</span></p>
+                            </div>
+                            <div class="form__content">
+                                <p class="form__text text">Welcome to Dak Profijt, the expert in the field of solar panels for your roof!</p>
+                                <p class="form__text text">
+                                    Are you also curious about the possibilities of solar energy and how this can contribute to lower energy costs and a sustainable future?
+                                </p>
+                                <p class="form__text text text-1">Enter your details and discover how much you can save!</p>
+                                <div class="error-alert" id="error-alert"></div>
+                                <div class="form__input-group">
+                                    <div class="form__box">
+                                        <label for="postalCode">Postal code</label>
+                                        <input type="text" id="postalCode" name="postalCode" data-inputName="postalCode" placeholder="1234AB" />
+                                    </div>
+                                    <div class="form__box">
+                                        <label for="houseNumber">House number</label>
+                                        <input type="text" id="houseNumber" name="houseNumber" data-inputName="houseNumber" placeholder="98" />
+                                    </div>
+                                    <div class="form__box">
+                                        <label for="addition">Addition</label>
+                                        <input type="text" id="addition" name="addition" data-inputName="addition" placeholder="a" />
+                                    </div>
+                                </div>
+                                <button class="main-button" type="button" data-go-to="1">Discover your savings</button>
+                            </div>
+                        </form>
+                        <form class="form form-stage-one">
+                            <div class="error-alert-top" id="error-alert-top"></div>
+                            <div class="form__top">
+                                <ol class="list">
+                                    <li class="list__item active">Location</li>
+                                    <li class="list__item">Choose a plan</li>
+                                    <li class="list__item">Consumption</li>
+                                    <li class="list__item">Complete</li>
+                                </ol>
+                            </div>
+                            <div class="form__content">
+                                <p class="form__lead lead">Exact <span>location</span></p>
+                                <p class="form__text text-1">Is the pin on the right roof?</p>
+                                <div class="location">
+                                    <div class="location__map" id="myMap"></div>
+                                    <div class="location__address">
+                                        <p class="location__street">Dr. Jan Mulderstraat</p>
+                                        <p class="location__houseNumber">36</p>
+                                        <p class="location__postcode">1544VC</p>
+                                        <p class="location__city">Zaandijk</p>
+                                    </div>
+                                </div>
+                                <div class="form__buttons-row">
+                                    <button class="main-button--dim" type="button" id="change-location">The pin is wrong</button>
+                                    <button class="main-button" type="button" data-go-to="2">Discover your savings</button>
+                                </div>
+                            </div>
+                        </form>
+                        <form class="form form-stage-two">
                             <div class="error-alert-top" id="error-alert-top"></div>
                             <div class="form__top">
                                 <ol class="list">
@@ -85,30 +142,30 @@
                                 <p class="form__text text-1">Choose your roof scan</p>
 
                                 <div class="radio">
-                                    <div class="radio__item">
-                                        <div class="radio__button">
-                                            <input type="radio" id="radio-1" name="option-1" value="1" />
-                                        </div>
-                                        <p class="radio__title">Personal advice (most chosen)</p>
-                                        <ul class="radio__list">
-                                            <li class="radio__list-item">Instant quote and offer</li>
-                                            <li class="radio__list-item">Estimation of the number of solar panels</li>
-                                            <li class="radio__list-item">Calculation of yield and payback period</li>
-                                            <li class="radio__list-item">Expected savings and returns</li>
-                                            <li class="radio__list-item">Accurate measurement and laying plan</li>
-                                        </ul>
+                                    <div class="radio__item-wrapper">
+                                        <input class="radio__button" type="radio" id="radio-one" name="plan" value="1" checked />
+                                        <label class="radio__item" for="radio-one">
+                                            <p class="radio__title">Personal advice (most chosen)</p>
+                                            <ul class="list">
+                                                <li class="list__item"><i class="fas fa-plus"></i>Instant quote and offer</li>
+                                                <li class="list__item"><i class="fas fa-plus"></i>Estimation of the number of solar panels</li>
+                                                <li class="list__item"><i class="fas fa-plus"></i>Calculation of yield and payback period</li>
+                                                <li class="list__item"><i class="fas fa-plus"></i>Expected savings and returns</li>
+                                                <li class="list__item"><i class="fas fa-plus"></i>Accurate measurement and laying plan</li>
+                                            </ul>
+                                        </label>
                                     </div>
-                                    <div class="radio__item">
-                                        <div class="radio__button">
-                                            <input type="radio" id="radio-1" name="option-1" value="1" />
-                                        </div>
-                                        <p class="radio__title">Personal advice (most chosen)</p>
-                                        <ul class="radio__list">
-                                            <li class="radio__list-item">Suitability of the roof</li>
-                                            <li class="radio__list-item">Estimate number of solar panels</li>
-                                            <li class="radio__list-item--minus">No personal advice and information</li>
-                                            <li class="radio__list-item--minus">You don't know what it will cost</li>
-                                        </ul>
+                                    <div class="radio__item-wrapper">
+                                        <input type="radio" class="radio__button" id="radio-two" name="plan" value="2" />
+                                        <label class="radio__item" for="radio-two">
+                                            <p class="radio__title">Only a roof scan</p>
+                                            <ul class="list">
+                                                <li class="list__item"><i class="fas fa-plus"></i>Suitability of the roof</li>
+                                                <li class="list__item"><i class="fas fa-plus"></i>Estimate number of solar panels</li>
+                                                <li class="list__item--minus"><i class="fas fa-minus"></i>No personal advice and information</li>
+                                                <li class="list__item--minus"><i class="fas fa-minus"></i>You don't know what it will cost</li>
+                                            </ul>
+                                        </label>
                                     </div>
                                 </div>
 
@@ -118,10 +175,120 @@
                                 </div>
                             </div>
                         </form>
+                        <form class="form form-stage-three">
+                            <div class="error-alert-top" id="error-alert-top"></div>
+                            <div class="form__top">
+                                <ol class="list">
+                                    <li class="list__item active done">Location</li>
+                                    <li class="list__item active done">Choose a plan</li>
+                                    <li class="list__item active">Consumption</li>
+                                    <li class="list__item">Complete</li>
+                                </ol>
+                            </div>
+                            <div class="form__content">
+                                <p class="form__lead lead">Consumption <span>of electricity</span></p>
+
+                                <p class="form__text text-1">Number of persons in household</p>
+
+                                <div class="radio">
+                                    <div class="radio__item-wrapper">
+                                        <input class="radio__button" type="radio" id="radio-1" name="people" value="1" checked />
+                                        <label class="radio__item" for="radio-1"><i class="fas fa-user"></i>1</label>
+                                    </div>
+                                    <div class="radio__item-wrapper">
+                                        <input class="radio__button" type="radio" id="radio-2" name="people" value="2" />
+                                        <label class="radio__item" for="radio-2"><i class="fas fa-user-friends"></i>2</label>
+                                    </div>
+                                    <div class="radio__item-wrapper">
+                                        <input class="radio__button" type="radio" id="radio-3" name="people" value="3" />
+                                        <label class="radio__item" for="radio-3"><i class="fas fa-users"></i>3</label>
+                                    </div>
+                                    <div class="radio__item-wrapper">
+                                        <input class="radio__button" type="radio" id="radio-4" name="people" value="4" />
+                                        <label class="radio__item" for="radio-4"><i class="fas fa-users"></i>4 </label>
+                                    </div>
+                                    <div class="radio__item-wrapper">
+                                        <input class="radio__button" type="radio" id="radio-5" name="people" value="5" />
+                                        <label class="radio__item" for="radio-5"><i class="fas fa-users"></i>5</label>
+                                    </div>
+                                    <div class="radio__item-wrapper">
+                                        <input class="radio__button" type="radio" id="radio-6" name="people" value="6" />
+                                        <label class="radio__item" for="radio-6"><i class="fas fa-users"></i>5+</label>
+                                    </div>
+                                </div>
+
+                                <p class="form__text--title">Consumption Electricity</p>
+                                <div class="form__text-wrapper">
+                                    <p class="form__text">
+                                        The average consumption for <span id="formThreePeopleNumer">1</span> person households <span id="formThreekWh">2500</span>kWh.
+                                    </p>
+                                    <p class="form__text">If you have a very different consumption, please let us know the number of kWh.</p>
+                                </div>
+
+                                <div class="form__box">
+                                    <input type="text" id="kWh" name="kWh" data-inputName="kWh" />
+                                    <label for="kWh">kWh</label>
+                                </div>
+
+                                <div class="form__buttons-row">
+                                    <button class="main-button--dim" id="">Previous</button>
+                                    <button class="main-button" type="button" data-go-to="4">Next</button>
+                                </div>
+                            </div>
+                        </form>
+                        <form class="form form-stage-four">
+                            <div class="error-alert-top" id="error-alert-top"></div>
+                            <div class="form__top">
+                                <ol class="list">
+                                    <li class="list__item active done">Location</li>
+                                    <li class="list__item active done">Choose a plan</li>
+                                    <li class="list__item active done">Consumption</li>
+                                    <li class="list__item active">Complete</li>
+                                </ol>
+                            </div>
+                            <div class="form__content">
+                                <p class="form__lead lead">Contact details</p>
+
+                                <p class="form__text text-1">Consumption Electricity</p>
+
+                                <div class="form__box-wrapper">
+                                    <div class="form__box">
+                                        <label for="first-name">First name</label>
+                                        <input type="text" id="first-name" name="kWh" data-inputName="first-name" />
+                                    </div>
+                                    <div class="form__box">
+                                        <label for="last-name">Last name</label>
+                                        <input type="text" id="last-name" name="kWh" data-inputName="last-name" />
+                                    </div>
+                                    <div class="form__box">
+                                        <label for="phone-number">Phone number</label>
+                                        <input type="text" id="phone-number" name="kWh" data-inputName="phone-number" />
+                                    </div>
+                                    <div class="form__box">
+                                        <label for="e-mail">E-mail address</label>
+                                        <input type="text" id="e-mail" name="kWh" data-inputName="e-mail" />
+                                    </div>
+                                </div>
+                                <p class="form__lead lead">What happens next?</p>
+                                <ol class="list-2">
+                                    <li class="list-2__item">
+                                        With the information you have provided, we determine the exact number of solar panels you need for your specific situation.
+                                    </li>
+                                    <li class="list-2__item">We make the financial aspects clear and understandable, both in terms of costs and revenues.</li>
+                                    <li class="list-2__item">This advice is completely non-binding, so there are no obligations.</li>
+                                </ol>
+
+                                <div class="form__buttons-row">
+                                    <button class="main-button--dim" id="" type="button">Previous</button>
+                                    <button class="main-button" type="button" data-go-to="4">Next</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </section>
+
         <section class="about" id="about">
             <div class="container">
                 <div class="about__inner inner text-output-wrapper">

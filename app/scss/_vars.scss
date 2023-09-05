@@ -48,6 +48,7 @@ $whiteSmoke: #e2e0d9;
 $primary: #2aa408;
 $light-primary: lighten($primary, 20%);
 $primary-super-light: lighten($primary, 30%);
+$primary-ultra-light: lighten($primary, 60%);
 $primaryDarken: darken($primary, 10%);
 $primaryComplement: complement($primary);
 

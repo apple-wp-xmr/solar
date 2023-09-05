@@ -660,117 +660,6 @@ const langSwitch = new LangDropdown();
 
 // multistage form logic
 
-const stageOne = `<form class="form form-stage-one">
-<div class="error-alert-top" id='error-alert-top'></div>
-<div class="form__top form__top--primary">
-    <p class="form__lead lead">Instant savings with <span>solar panels</span></p>
-</div>
-<div class="form__content">
-    <p class="form__text text">Welcome to Dak Profijt, the expert in the field of solar panels for your roof!</p>
-    <p class="form__text text">
-        Are you also curious about the possibilities of solar energy and how this can contribute to lower energy costs and a sustainable future?
-    </p>
-    <p class="form__text text text-1">Enter your details and discover how much you can save!</p>
-    <div class="error-alert" id="error-alert"></div>
-    <div class="form__input-group">
-        <div class="form__box">
-            <label for="fname">Postal code</label>
-            <input type="text" id="postalCode" name="postalCode" data-inputName="postalCode" placeholder="1234AB">
-        </div>
-        <div class="form__box">
-            <label for="fname">House number</label>
-            <input type="text" id="houseNumber" name="houseNumber" data-inputName="houseNumber" placeholder="98">
-        </div>
-        <div class="form__box">
-            <label for="fname">Addition</label>
-            <input type="text" id="addition" name="addition" data-inputName="addition" placeholder="a">
-        </div>
-    </div>
-    <button class="main-button" type="button" data-go-to="1">Discover your savings</button>
-</div>
-</form>`;
-
-const stageTwo = `<form class="form form-stage-two">
-<div class="error-alert-top" id="error-alert-top"></div>
-<div class="form__top">
-    <ol class="list">
-        <li class="list__item active">Location</li>
-        <li class="list__item">Choose a plan</li>
-        <li class="list__item">Consumption</li>
-        <li class="list__item">Complete</li>
-    </ol>
-</div>
-<div class="form__content">
-    <p class="form__lead lead">Exact <span>location</span></p>
-    <p class="form__text text-1">Is the pin on the right roof?</p>
-    <div class="location">
-        <div class="location__map" id="myMap"></div>
-        <div class="location__address">
-            <p class="location__street">Dr. Jan Mulderstraat</p>
-            <p class="location__houseNumber">36</p>
-            <p class="location__postcode">1544VC</p>
-            <p class="location__city">Zaandijk</p>
-        </div>
-    </div>
-    <div class="form__buttons-row">
-        <button class="main-button--dim" id="change-location">The pin is wrong</button>
-        <button class="main-button" type="button" data-go-to="2">Discover your savings</button>
-    </div>
-</div>
-</form>`;
-
-const stageThree = ` <form class="form form-stage-three">
-<div class="error-alert-top" id="error-alert-top"></div>
-<div class="form__top">
-    <ol class="list">
-        <li class="list__item active done">Location</li>
-        <li class="list__item active">Choose a plan</li>
-        <li class="list__item">Consumption</li>
-        <li class="list__item">Complete</li>
-    </ol>
-</div>
-<div class="form__content">
-    <p class="form__lead lead"><span>Good news! </span></p>
-    <p class="form__text text-2">The roof of this house seems suitable!</p>
-    <p class="form__text text-1">Choose your roof scan</p>
-
-    <div class="radio">
-        <div class="radio__item">
-            <div class="radio__button">
-                <input type="radio" id="radio-1" name="option-1" value="1" />
-            </div>
-            <p class="radio__title">Personal advice (most chosen)</p>
-            <ul class="radio__list">
-                <li class="radio__list-item">Instant quote and offer</li>
-                <li class="radio__list-item">Estimation of the number of solar panels</li>
-                <li class="radio__list-item">Calculation of yield and payback period</li>
-                <li class="radio__list-item">Expected savings and returns</li>
-                <li class="radio__list-item">Accurate measurement and laying plan</li>
-            </ul>
-        </div>
-        <div class="radio__item">
-            <div class="radio__button">
-                <input type="radio" id="radio-1" name="option-1" value="1" />
-            </div>
-            <p class="radio__title">Personal advice (most chosen)</p>
-            <ul class="radio__list">
-                <li class="radio__list-item">Suitability of the roof</li>
-                <li class="radio__list-item">Estimate number of solar panels</li>
-                <li class="radio__list-item--minus">No personal advice and information</li>
-                <li class="radio__list-item--minus">You don't know what it will cost</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="form__buttons-row">
-        <button class="main-button--dim" id="change-location">Previous</button>
-        <button class="main-button" type="button" data-go-to="2">Next</button>
-    </div>
-</div>
-</form>`;
-
-let formStages = [stageOne, stageTwo, stageThree];
-
 let myFormData = {
     stage: 0,
     postalCode: '',
@@ -792,6 +681,8 @@ let FormWrapper = document.getElementById('form-multyStage-wrapper');
     });
 })();
 
+function changeState() {}
+
 function StageZeroIn() {
     $(document).on('ready', function () {
         $('#postalCode').mask('9999aa');
@@ -800,29 +691,13 @@ function StageZeroIn() {
             let elem = e.currentTarget;
             elem.setSelectionRange(0, 0);
         });
-
-        $('#houseNumber').mask('99');
-        $('#houseNumber').on('mouseup', (e) => {
-            e.stopPropagation();
-            let elem = e.currentTarget;
-            elem.setSelectionRange(0, 0);
-        });
     });
 }
 
-function StageZeroOut() {
-    $('#postalCode').unmask();
-    $('#houseNumber').unmask('99');
-}
-
-function preMultiStageForm() {
+function formStageZero() {
     let stage = myFormData.stage;
-    FormWrapper.innerHTML = formStages[stage];
+    changeState();
     StageZeroIn();
-}
-
-function changeHtml() {
-    FormWrapper.innerHTML = formStages[stage];
 }
 
 async function getLocation() {
@@ -879,7 +754,7 @@ function showTopError(text) {
     output.innerHTML = `<p class="text text-1">${text}</p>`;
 }
 
-preMultiStageForm();
+formStageZero();
 
 // Initialize and add the map
 
@@ -958,7 +833,7 @@ async function initMap() {
     window.marker = marker;
 }
 
-// initMap();
+initMap();
 
 function wrongPin() {
     marker.setOptions({

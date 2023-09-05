@@ -1202,7 +1202,7 @@
                 padding: 20px 0;
             }
         }
-        .form-stage-one {
+        .form-stage-zero {
             .form {
                 &__box {
                     max-width: 100px;
@@ -1214,7 +1214,7 @@
                 }
             }
         }
-        .form-stage-two {
+        .form-stage-one {
             .location {
                 display: flex;
                 gap: 30px;
@@ -1236,23 +1236,145 @@
                 padding-bottom: 50px;
             }
         }
-        .form-stage-three {
-            .form {
-                &__intro {
-                    font-size: 28px;
-                    line-height: 30px;
+        .form-stage-two {
+            .radio {
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+                cursor: pointer;
+                padding-bottom: 30px;
+                &__item-wrapper {
+                    position: relative;
+                    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+                    border-radius: 5px;
                 }
-                &__text.text-1 {
-                    padding-bottom: 20px;
-                    font-size: 17px;
-                    line-height: 20px;
+                &__item {
+                    border: 1px solid transparent;
+                    transition: all 0.3s ease-in-out;
+                    border-radius: 5px;
+                    padding: 15px;
+                    min-width: 300px;
+                    display: block;
+                    height: 100%;
+                    &:hover {
+                        border: 1px solid $primary;
+                        background-color: $primary-ultra-light;
+                    }
                 }
-                &__text.text-2 {
+                &__button {
+                    position: absolute;
+                    left: 10px;
+                    top: 15px;
+                    &:checked + .radio__item {
+                        background-color: $primary-ultra-light;
+                    }
+                }
+                &__title {
+                    display: inline-block;
+                    font-weight: 100;
+                    font-style: normal;
+                    font-size: 20px;
+                    line-height: 22px;
                     padding-bottom: 10px;
+                    margin-left: 20px;
+                }
+                .list {
+                    padding-bottom: 10px;
+                    &__item {
+                        padding-bottom: 10px;
+                        @include FCata400;
+                    }
+                    &__item--minus {
+                        @extend .list__item;
+                        i {
+                            color: $btn-secondary;
+                        }
+                    }
                 }
             }
         }
-        .form-four-two {
+        .form-stage-three {
+            .radio {
+                display: flex;
+                justify-content: space-between;
+                padding-bottom: 10px;
+                &__button {
+                    display: none;
+                }
+                &__button:checked + .radio__item {
+                    background-color: $primary-ultra-light;
+                    i {
+                        color: $primary;
+                    }
+                    color: $primary;
+                }
+                &__item {
+                    padding: 10px;
+                    border: 1px solid $secondary;
+                    display: block;
+                    border-radius: 5px;
+                    font-size: 20px;
+                    min-width: 90px;
+                    text-align: center;
+                    i {
+                        padding-right: 5px;
+                        font-size: 26px;
+                        line-height: 30px;
+                        color: black;
+                    }
+                    transition: all 0.3 ease-in-out;
+                    &:hover {
+                        transform: scale(1.05);
+                    }
+                }
+            }
+            .form {
+                &__text-wrapper {
+                    padding-bottom: 20px;
+                }
+                &__text {
+                    padding-bottom: 5px;
+                }
+                &__text--title {
+                    @extend .form__text;
+                    padding-bottom: 20px;
+                    font-size: 20px;
+                    line-height: 20px;
+                    @include FCata400;
+                }
+                &__box {
+                    input {
+                        max-width: 300px;
+                        margin-bottom: 80px;
+                        margin-right: 20px;
+                    }
+                }
+            }
+        }
+        .form-stage-four {
+            .form {
+                &__box-wrapper {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr; /* Two equal-width columns */
+                    gap: 10px; /* Gap between grid items */
+                    padding-bottom: 20px;
+                }
+                &__lead {
+                    padding-bottom: 10px;
+                }
+            }
+            .list-2 {
+                padding-bottom: 30px;
+
+                &__item {
+                    list-style-type: number;
+                    font-size: 18px;
+                    line-height: 20px;
+                    padding-left: 5px;
+                    margin-left: 20px;
+                    padding-bottom: 10px;
+                }
+            }
         }
     }
 }
