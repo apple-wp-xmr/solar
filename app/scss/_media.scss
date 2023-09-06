@@ -494,4 +494,77 @@
             }
         }
     }
+
+    .quiz {
+        .form {
+            &__text {
+                font-size: 15px;
+                line-height: 17px;
+                padding-bottom: 18px;
+            }
+            &__content {
+                padding: 10px 10px;
+            }
+            &__top {
+                padding: 96px 10px 26px 10px;
+                .list {
+                    &__item {
+                    }
+                }
+            }
+        }
+        .form-stage-zero {
+            .form {
+                &__top {
+                    padding: 40px 0;
+                }
+                &__lead {
+                    font-size: 24px;
+                }
+                &__input-group {
+                    flex-direction: column;
+                }
+                &__box {
+                    max-width: none;
+                    label {
+                        display: block;
+                        text-align: center;
+                        padding-bottom: 2px;
+                    }
+                    padding-bottom: 10px;
+                }
+                &__box.active {
+                    input {
+                        border: solid $primary 2px;
+                        outline: none;
+                    }
+                }
+                .main-button {
+                }
+            }
+        }
+        .form-stage-one {
+            .location {
+                flex-direction: column;
+                &__map {
+                    width: 100%;
+                }
+                &__address {
+                    padding-top: 0px;
+                    font-size: 18px;
+                    line-height: 20px;
+                }
+                padding-bottom: 20px;
+            }
+        }
+        .form-stage-two {
+            .radio {
+                flex-direction: column;
+            }
+        }
+        .form-stage-three {
+        }
+        .form-stage-four {
+        }
+    }
 }
