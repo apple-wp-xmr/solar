@@ -981,12 +981,13 @@
         align-items: center;
         flex-wrap: nowrap;
         width: 200%;
-        animation: scrollText 5s infinite linear;
+        animation: scrollText 7s infinite linear;
         min-width: 1000px;
     }
     &__inner--reverse {
         @extend .certificates__inner;
-        animation: scrollTextR 5s infinite linear;
+        animation-direction: reverse;
+        width: 300%;
     }
 
     &__item {
@@ -999,14 +1000,6 @@
         }
         to {
             transform: translateX(-50%);
-        }
-    }
-    @keyframes scrollTextR {
-        from {
-            transform: translateX(-50%);
-        }
-        to {
-            transform: translateX(0%);
         }
     }
 }
@@ -1060,12 +1053,50 @@
             color: black;
         }
         .form-wrapper {
+            min-height: 1px;
             form {
-                margin: 70px 0;
+                margin: 70px auto;
                 display: none;
             }
+
             form.active {
                 display: block;
+            }
+            form.disappear {
+                animation-name: disappear;
+                animation-duration: 1001ms;
+                animation-fill-mode: forwards;
+                display: block;
+            }
+            form.appear {
+                animation-name: appear;
+                animation-duration: 1s;
+                animation-fill-mode: forwards;
+            }
+
+            @keyframes appear {
+                0% {
+                    transform: scale(0);
+                }
+                90% {
+                    transform: scale(1.1);
+                }
+                100% {
+                    transform: scale(1);
+                }
+            }
+
+            @keyframes disappear {
+                0% {
+                    transform: scale(1);
+                }
+                90% {
+                    transform: scale(1.05);
+                }
+                100% {
+                    transform: scale(0);
+                    display: none;
+                }
             }
         }
         .form {
@@ -1216,6 +1247,7 @@
             }
         }
         .form-stage-zero {
+            margin: 70px 0 !important;
             .form {
                 &__box {
                     max-width: 100px;

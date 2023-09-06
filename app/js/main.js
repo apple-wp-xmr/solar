@@ -660,6 +660,12 @@ const langSwitch = new LangDropdown();
 
 // multistage form logic
 
+function delay(ms) {
+    return new Promise((resolve) => {
+        setTimeout(resolve, ms);
+    });
+}
+
 let myFormData = {
     postalCode: '',
     houseNumber: '',
@@ -712,50 +718,6 @@ $(document).on('ready', function () {
     });
 });
 
-async function getLocation() {
-    const pattern = /_/g;
-    let postalCode = myFormData.postalCode;
-    postalCode = postalCode.replace(pattern, '');
-
-    let houseNumber = myFormData.houseNumber;
-    houseNumber = houseNumber.replace(pattern, '');
-    if (postalCode.length < 6 || houseNumber.length < 2) {
-        const errorAlert = FormWrapper.querySelector('#error-alert');
-        errorAlert.innerHTML = `<p class="text text-1"><i class='far fa-exclamation-square'></i>There was a problem with your submission. Check the fields below.</p>`;
-        return;
-    }
-
-    const params = new URLSearchParams();
-    params.set('action', 'get_postcode');
-    params.set('security', '2cc101c799');
-    params.set('postcode', postalCode);
-    params.set('huisnummer', houseNumber);
-    params.set('toevoeging', myFormData.addition);
-
-    const url = `https://dakprofijt.nl/wp-admin/admin-ajax.php?${params.toString()}`;
-
-    try {
-        const response = await fetch(url);
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        const data = await response.json();
-
-        myFormData.latitude = data.latitude;
-        myFormData.longitude = data.longitude;
-        myFormData.street = data.street;
-        myFormData.houseNumber = data.houseNumber;
-        myFormData.city = data.city;
-    } catch (error) {
-        // Handle errors here
-        console.error('Fetch error:', error);
-
-        showTopError('We could not find a valid address. Try searching again.');
-    }
-}
-
 function showTopError(text) {
     let output = FormWrapper.querySelector('#error-alert-top');
     output.innerHTML = `<p class="text text-1">${text}</p>`;
@@ -763,25 +725,117 @@ function showTopError(text) {
 // quiz slade change logic!!!
 function changeFormSlide(goToSlide) {
     if (goToSlide == 'start') {
+        const pattern = /_/g;
+        let postalCode = myFormData.postalCode;
+        postalCode = postalCode.replace(pattern, '');
+        console.log(postalCode);
+
+        if (postalCode.length < 6) {
+            return;
+        }
         validateFormAndFatchMapData();
         return;
     }
     if (goToSlide == 'final') {
-        console.log('send data');
+        sendFormDataToServer();
         return;
     }
     const formLength = FormWrapper.children.length;
     for (let i = 1; i < formLength; i++) {
+        if (FormWrapper.children[i].classList.contains('active')) {
+            FormWrapper.children[i].classList.add('disappear');
+        }
         FormWrapper.children[i].classList.remove('active');
+
+        delay(1000).then(() => {
+            FormWrapper.children[i].classList.remove('disappear');
+        });
         if (i == goToSlide) {
-            FormWrapper.children[i].classList.add('active');
+            delay(1000).then(() => {
+                FormWrapper.children[i].classList.add('active');
+                FormWrapper.children[i].classList.add('appear');
+                delay(1000).then(() => {
+                    FormWrapper.children[i].classList.remove('appear');
+                });
+            });
         }
     }
 }
-function validateFormAndFatchMapData() {
-    console.log('asking for data....');
-    FormWrapper.children[0].classList.remove('active');
-    FormWrapper.children[1].classList.add('active');
+async function validateFormAndFatchMapData() {
+    try {
+        // Use the fetch function to make an HTTP GET request
+        const response = await fetch('./data.json');
+
+        // Check if the response status is OK (status code 200)
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        // Parse the JSON data from the response
+        const jsonData = await response.json();
+
+        // Check if "mydata" is true
+        if (jsonData.mydata === true) {
+            FormWrapper.children[0].classList.add('disappear');
+            FormWrapper.children[0].classList.remove('active');
+            delay(1000).then(() => {
+                FormWrapper.children[0].classList.remove('disappear');
+                FormWrapper.children[1].classList.add('active');
+                FormWrapper.children[1].classList.add('appear');
+                delay(1000).then(() => {
+                    FormWrapper.children[1].classList.remove('appear');
+                });
+            });
+        } else {
+            showTopError('"mydata" is not true');
+        }
+    } catch (error) {
+        // Handle any errors that occurred during the fetch
+        console.error('Error:', error);
+        throw error; // Rethrow the error to be handled by the caller, if needed
+    }
+}
+
+async function sendFormDataToServer() {
+    try {
+        // Use the fetch function to make an HTTP GET request
+        const response = await fetch('./dataform.json');
+
+        // Check if the response status is OK (status code 200)
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        // Parse the JSON data from the response
+        const jsonData = await response.json();
+        if (jsonData.mydata === true) {
+            FormWrapper.children[4].classList.remove('active');
+            FormWrapper.children[4].classList.add('disappear');
+            delay(1000).then(() => {
+                FormWrapper.children[0].classList.remove('disappear');
+                document.querySelector('.quiz').style.display = 'none';
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thank You!',
+                    text: 'Your form has been submitted successfully.',
+                    confirmButtonColor: '#2aa408',
+                    confirmButtonText: 'OK',
+                });
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong. Please try again later.',
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'OK',
+            });
+        }
+    } catch (error) {
+        // Handle any errors that occurred during the fetch
+        console.error('Error:', error);
+        throw error; // Rethrow the error to be handled by the caller, if needed
+    }
 }
 
 // Initialize and add the map
@@ -873,3 +927,17 @@ function wrongPin() {
         zoomControl: true,
     });
 }
+
+let FormWrapper2 = document.getElementById('form-wrapper-2');
+let formData2 = {};
+(function trackInput() {
+    FormWrapper2.addEventListener('keyup', function trackKeys(e) {
+        e.stopPropagation();
+
+        if ((e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') && e.target.getAttribute('data-inputname')) {
+            const inputName = e.target.getAttribute('data-inputname');
+            const inputValue = e.target.value;
+            formData2[inputName] = inputValue;
+        }
+    });
+})();
