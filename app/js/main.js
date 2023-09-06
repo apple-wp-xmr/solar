@@ -661,7 +661,6 @@ const langSwitch = new LangDropdown();
 // multistage form logic
 
 let myFormData = {
-    stage: 0,
     postalCode: '',
     houseNumber: '',
     addition: '',
@@ -698,33 +697,22 @@ let FormWrapper = document.getElementById('form-multyStage-wrapper');
             wrongPin();
         }
         if (e.target.type === 'button' && e.target.getAttribute('data-go-to')) {
-            console.log(e.target.dataset);
+            const sectionGoTo = e.target.dataset.goTo;
+            changeFormSlide(sectionGoTo);
         }
     });
 })();
 
-function changeState() {}
-
-function StageZeroIn() {
-    $(document).on('ready', function () {
-        $('#postalCode').mask('9999aa');
-        $('#postalCode').on('mouseup', (e) => {
-            e.stopPropagation();
-            let elem = e.currentTarget;
-            elem.setSelectionRange(0, 0);
-        });
+$(document).on('ready', function () {
+    $('#postalCode').mask('9999aa');
+    $('#postalCode').on('mouseup', (e) => {
+        e.stopPropagation();
+        let elem = e.currentTarget;
+        elem.setSelectionRange(0, 0);
     });
-}
-
-function formStageZero() {
-    let stage = myFormData.stage;
-    changeState();
-    StageZeroIn();
-}
+});
 
 async function getLocation() {
-    let stage = myFormData.stage;
-
     const pattern = /_/g;
     let postalCode = myFormData.postalCode;
     postalCode = postalCode.replace(pattern, '');
@@ -760,9 +748,6 @@ async function getLocation() {
         myFormData.street = data.street;
         myFormData.houseNumber = data.houseNumber;
         myFormData.city = data.city;
-
-        console.log(data);
-        renderStage(1);
     } catch (error) {
         // Handle errors here
         console.error('Fetch error:', error);
@@ -776,7 +761,9 @@ function showTopError(text) {
     output.innerHTML = `<p class="text text-1">${text}</p>`;
 }
 
-formStageZero();
+function changeFormSlide(goToSlide) {
+    console.log(goToSlide);
+}
 
 // Initialize and add the map
 
@@ -850,7 +837,8 @@ async function initMap() {
     });
     // Add an event listener to track marker position
     google.maps.event.addListener(marker, 'dragend', function (event) {
-        console.log('Marker dragged to:', event.latLng.lat(), event.latLng.lng());
+        myFormData.longitude = event.latLng.lng();
+        myFormData.latitude = event.latLng.lat();
     });
     window.marker = marker;
 }
