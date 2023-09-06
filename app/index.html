@@ -110,7 +110,7 @@
                             </div>
                             <div class="form__content">
                                 <p class="form__lead lead">Exact <span>location</span></p>
-                                <p class="form__text text-1">Is the pin on the right roof?</p>
+                                <p class="form__text text-1" data-wrong-location>Is the pin on the right roof?</p>
                                 <div class="location">
                                     <div class="location__map" id="myMap"></div>
                                     <div class="location__address">
@@ -170,8 +170,8 @@
                                 </div>
 
                                 <div class="form__buttons-row">
-                                    <button class="main-button--dim" id="change-location">Previous</button>
-                                    <button class="main-button" type="button" data-go-to="2">Next</button>
+                                    <button class="main-button--dim" type="button" data-go-to="2">Previous</button>
+                                    <button class="main-button" type="button" data-go-to="3">Next</button>
                                 </div>
                             </div>
                         </form>
@@ -192,27 +192,27 @@
 
                                 <div class="radio">
                                     <div class="radio__item-wrapper">
-                                        <input class="radio__button" type="radio" id="radio-1" name="people" value="1" checked />
+                                        <input class="radio__button" type="radio" id="radio-1" name="people" value="1800" checked />
                                         <label class="radio__item" for="radio-1"><i class="fas fa-user"></i>1</label>
                                     </div>
                                     <div class="radio__item-wrapper">
-                                        <input class="radio__button" type="radio" id="radio-2" name="people" value="2" />
+                                        <input class="radio__button" type="radio" id="radio-2" name="people" value="2500" />
                                         <label class="radio__item" for="radio-2"><i class="fas fa-user-friends"></i>2</label>
                                     </div>
                                     <div class="radio__item-wrapper">
-                                        <input class="radio__button" type="radio" id="radio-3" name="people" value="3" />
+                                        <input class="radio__button" type="radio" id="radio-3" name="people" value="3200" />
                                         <label class="radio__item" for="radio-3"><i class="fas fa-users"></i>3</label>
                                     </div>
                                     <div class="radio__item-wrapper">
-                                        <input class="radio__button" type="radio" id="radio-4" name="people" value="4" />
+                                        <input class="radio__button" type="radio" id="radio-4" name="people" value="4000" />
                                         <label class="radio__item" for="radio-4"><i class="fas fa-users"></i>4 </label>
                                     </div>
                                     <div class="radio__item-wrapper">
-                                        <input class="radio__button" type="radio" id="radio-5" name="people" value="5" />
+                                        <input class="radio__button" type="radio" id="radio-5" name="people" value="4500" />
                                         <label class="radio__item" for="radio-5"><i class="fas fa-users"></i>5</label>
                                     </div>
                                     <div class="radio__item-wrapper">
-                                        <input class="radio__button" type="radio" id="radio-6" name="people" value="6" />
+                                        <input class="radio__button" type="radio" id="radio-6" name="people" value="5000" />
                                         <label class="radio__item" for="radio-6"><i class="fas fa-users"></i>5+</label>
                                     </div>
                                 </div>
@@ -226,12 +226,12 @@
                                 </div>
 
                                 <div class="form__box">
-                                    <input type="text" id="kWh" name="kWh" data-inputName="kWh" />
+                                    <input type="text" id="kWh" name="kWh" data-inputName="kWh" value="1800" />
                                     <label for="kWh">kWh</label>
                                 </div>
 
                                 <div class="form__buttons-row">
-                                    <button class="main-button--dim" id="">Previous</button>
+                                    <button class="main-button--dim" type="button" data-go-to="2">Previous</button>
                                     <button class="main-button" type="button" data-go-to="4">Next</button>
                                 </div>
                             </div>
@@ -279,8 +279,8 @@
                                 </ol>
 
                                 <div class="form__buttons-row">
-                                    <button class="main-button--dim" id="" type="button">Previous</button>
-                                    <button class="main-button" type="button" data-go-to="4">Next</button>
+                                    <button class="main-button--dim" type="button" data-go-to="4">Previous</button>
+                                    <button class="main-button" type="button" data-go-to="final">Send</button>
                                 </div>
                             </div>
                         </form>
@@ -671,7 +671,7 @@
             <!-- <div class="container"> -->
             <p class="certificates__title intro">Our partners</p>
             <div class="certificates-wrapper">
-                <div class="certificates__inner--reverse">
+                <div class="certificates__inner">
                     <div class="certificates__item">
                         <img src="images/partners/Picture1.png" alt="" />
                     </div>

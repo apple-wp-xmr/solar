@@ -679,6 +679,28 @@ let FormWrapper = document.getElementById('form-multyStage-wrapper');
             myFormData[inputName] = inputValue;
         }
     });
+    FormWrapper.addEventListener('click', function trackClick(e) {
+        e.stopPropagation();
+        if (e.target.type == 'radio') {
+            const inputName = e.target.getAttribute('name');
+            const inputValue = e.target.value;
+            myFormData[inputName] = inputValue;
+            if (inputName === 'people') {
+                const element = document.querySelector('[data-inputname="kWh"]');
+                if (element) {
+                    element.value = inputValue; // Replace 'New Value' with the desired value}
+                }
+            }
+        }
+        if (e.target.id === 'change-location') {
+            e.target.style.display = 'none';
+            FormWrapper.querySelector('[data-wrong-location]').innerHTML = '<span>You can now drag</span> the pin to the correct <span>roof</span> ';
+            wrongPin();
+        }
+        if (e.target.type === 'button' && e.target.getAttribute('data-go-to')) {
+            console.log(e.target.dataset);
+        }
+    });
 })();
 
 function changeState() {}
