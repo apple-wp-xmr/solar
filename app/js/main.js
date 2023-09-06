@@ -760,9 +760,28 @@ function showTopError(text) {
     let output = FormWrapper.querySelector('#error-alert-top');
     output.innerHTML = `<p class="text text-1">${text}</p>`;
 }
-
+// quiz slade change logic!!!
 function changeFormSlide(goToSlide) {
-    console.log(goToSlide);
+    if (goToSlide == 'start') {
+        validateFormAndFatchMapData();
+        return;
+    }
+    if (goToSlide == 'final') {
+        console.log('send data');
+        return;
+    }
+    const formLength = FormWrapper.children.length;
+    for (let i = 1; i < formLength; i++) {
+        FormWrapper.children[i].classList.remove('active');
+        if (i == goToSlide) {
+            FormWrapper.children[i].classList.add('active');
+        }
+    }
+}
+function validateFormAndFatchMapData() {
+    console.log('asking for data....');
+    FormWrapper.children[0].classList.remove('active');
+    FormWrapper.children[1].classList.add('active');
 }
 
 // Initialize and add the map

@@ -1060,6 +1060,13 @@
             color: black;
         }
         .form-wrapper {
+            form {
+                margin: 70px 0;
+                display: none;
+            }
+            form.active {
+                display: block;
+            }
         }
         .form {
             max-width: 740px;
